@@ -1,8 +1,12 @@
 <template>
 	<Header />
-	<v-main>
-		<slot />
-	</v-main>
+	<div class="app__content">
+		<aside>left aside</aside>
+		<v-main>
+			<slot />
+		</v-main>
+		<aside>right aside</aside>
+	</div>
 	<Footer />
 </template>
 

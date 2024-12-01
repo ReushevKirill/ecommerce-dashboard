@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     },
     vuetifyOptions: {
       theme: {
+        defaultTheme: 'light',
         themes: {
           light: {
             colors: {
