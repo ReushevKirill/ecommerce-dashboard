@@ -1,9 +1,14 @@
+.app {
+  background: var(--v-theme-background);
+}
+
 .app__container {
-  // app container styles
+  position: relative;
+  max-width: var(--app-widthMax);
+  margin-inline: auto;
 }
 
 body {
-  // body styles
 }
 
 .container {

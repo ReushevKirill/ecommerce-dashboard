@@ -15,7 +15,16 @@ export default defineNuxtConfig({
       /* module specific options */
     },
     vuetifyOptions: {
-      /* vuetify options */
+      theme: {
+        themes: {
+          light: {
+            colors: {
+              primary: '#ff7d31',
+              background: '#f2f2f2'
+            }
+          }
+        }
+      }
     }
   }
 })

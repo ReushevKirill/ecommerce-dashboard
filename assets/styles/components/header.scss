@@ -1,0 +1,9 @@
+.header {
+    position: fixed;
+    left: 50%;
+    right: 0;
+    top: 0;
+    background-color: var(--clr-white);
+    max-width: var(--app-widthMax);
+    transform: translateX(-50%);
+}

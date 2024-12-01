@@ -1,0 +1,15 @@
+
+// global variables
+:root {
+    // simple colors
+    --clr-white: #fff;
+    --clr-black: #000;
+    --clr-concrete: #f2f2f2;
+
+    // system colors
+    --clr-primary: #ff7d31;
+    --clr-bgPrimary: var(--clr-concrete);
+
+    // max-width-app
+    --app-widthMax: 1780px;
+}

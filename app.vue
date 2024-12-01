@@ -1,11 +1,11 @@
 <template>
 	<div class="app">
 		<div class="app__container">
-			<NuxtLayout>
-				<v-app>
+			<v-app theme="light">
+				<NuxtLayout>
 					<NuxtPage />
-				</v-app>
-			</NuxtLayout>
+				</NuxtLayout>
+			</v-app>
 		</div>
 	</div>
 </template>
