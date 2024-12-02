@@ -1,11 +1,11 @@
 <template>
 	<Header />
 	<div class="app__content">
-		<aside>left aside</aside>
-		<v-main>
+		<LeftAside />
+		<main class="main">
 			<slot />
-		</v-main>
-		<aside>right aside</aside>
+		</main>
+		<RightAside />
 	</div>
 	<Footer />
 </template>

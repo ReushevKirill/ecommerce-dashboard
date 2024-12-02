@@ -15,4 +15,10 @@
 
     // z-indexes
     --z-header: 100;
+
+    // border-radius
+    --header-borderRadius: 0 0 32px 32px;
+    --leftAside-borderRadius: 20px;
+    --rightAside-borderRadius: 24px;
+    --main-borderRadius: 32px 32px 0 0;
 }

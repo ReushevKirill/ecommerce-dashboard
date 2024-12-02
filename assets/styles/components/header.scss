@@ -7,11 +7,12 @@
     width: min(100%, var(--app-widthMax));
     transform: translateX(-50%);
     z-index: var(--z-header);
+    border-radius: var(--header-borderRadius);
 }
 
 .header__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 24px;
 }

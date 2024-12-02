@@ -9,7 +9,7 @@ export const useProductStore = defineStore('product', () => {
 	const config = useRuntimeConfig()
 	const BASE_URL = config.public.apiBase || 'https://dummyjson.com'
 
-	async function fetchProducts() {
+	async function fetchProducts(): Promise<ProductType[]> {
 		if (products.value.length > 0) {
 			return products
 		}
@@ -20,10 +20,9 @@ export const useProductStore = defineStore('product', () => {
 				'Content-Type': 'application/json',
 			},
 		})
-
 		products.value = data?.products ?? []
 
-		return products
+		return data.products
 	}
 
 	return {

@@ -2,13 +2,16 @@
 	import { useProductStore } from '~/store/productsStore'
 
 	const productStore = useProductStore()
-	const { products, error, isLoading } = storeToRefs(productStore)
-	useAsyncData('products', () => productStore.fetchProducts())
+	const {
+		data: products,
+		status,
+		error,
+	} = useAsyncData('products', () => productStore.fetchProducts())
 </script>
 
 <template>
-	<div v-if="isLoading">Загрузка...</div>
-	<div v-else-if="error">{{ productStore.error }}</div>
+	<div v-if="status === 'pending'">Загрузка...</div>
+	<div v-else-if="error">{{ error }}</div>
 	<div v-else>
 		<div v-for="product in products" :key="product.id">
 			<h3>{{ product.title }}</h3>
