@@ -10,9 +10,6 @@ export const useProductStore = defineStore('product', () => {
 	const BASE_URL = config.public.apiBase || 'https://dummyjson.com'
 
 	async function fetchProducts(): Promise<ProductType[]> {
-		if (products.value.length > 0) {
-			return products
-		}
 		const data: { products: ProductType[] } = await $fetch('/products?limit=0', {
 			baseURL: BASE_URL,
 			method: 'GET',
@@ -20,7 +17,10 @@ export const useProductStore = defineStore('product', () => {
 				'Content-Type': 'application/json',
 			},
 		})
-		products.value = data?.products ?? []
+
+		if (products.value.length === 0) {
+			products.value = data?.products ?? []
+		}
 
 		return data.products
 	}
