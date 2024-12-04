@@ -31,8 +31,6 @@ export const useProductStore = defineStore('product', () => {
 		}
 	}
 
-	async function getAllCategories() {}
-
 	return {
 		products,
 		isLoading,

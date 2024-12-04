@@ -12,7 +12,6 @@
 			<div v-else-if="error">{{ error }}</div>
 			<div v-else>
 				<div v-for="category in categories" :key="category.id">
-					<h3>{{ category.slug }}</h3>
 					<p>{{ category.name }}</p>
 				</div>
 			</div>
