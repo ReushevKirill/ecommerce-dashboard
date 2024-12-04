@@ -3,14 +3,17 @@
     left: 50%;
     right: 0;
     top: 0;
+    min-height: var(--header-height);
+    width: var(--app-widthContainer);
+    display: flex;
     background-color: var(--clr-white);
-    width: min(100%, var(--app-widthMax));
     transform: translateX(-50%);
     z-index: var(--z-header);
     border-radius: var(--header-borderRadius);
 }
 
 .header__container {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;

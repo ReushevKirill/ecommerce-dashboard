@@ -1,5 +1,9 @@
 <script lang="ts" setup></script>
 
 <template>
-	<aside class="right-aside">right aside</aside>
+	<aside class="left-aside">
+		<div class="left-aside__container">
+			<slot />
+		</div>
+	</aside>
 </template>

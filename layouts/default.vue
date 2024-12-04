@@ -1,13 +1,27 @@
+<script lang="ts" setup>
+	import { useCategoriesStore } from '~/store/categoriesStore'
+import { useProductStore } from '~/store/productsStore'
+
+	const productStore = useProductStore()
+	const categoriesStore = useCategoriesStore()
+	
+	onMounted(() => {
+		productStore.fetchAllProducts()
+		categoriesStore.fetchAllCategories()
+	})
+</script>
+
 <template>
 	<Header />
 	<div class="app__content">
-		<LeftAside />
-		<main class="main">
+		<LeftAside>
+			<CatalogTree />
+		</LeftAside>
+		<Main>
 			<slot />
-		</main>
-		<RightAside />
+		</Main>
+		<RightAside>
+			<CatalogTree />
+		</RightAside>
 	</div>
-	<Footer />
 </template>
-
-<script lang="ts" setup></script>

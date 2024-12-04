@@ -1,7 +1,9 @@
-// micro components
-
-
 // macro components
 @use '../styles/components/header';
+@use '../styles/components/main';
 @use '../styles/components/left-aside';
 @use '../styles/components/right-aside';
+@use '../styles/components/footer';
+
+// micro components
+@use '../styles/components/catalog-tree';

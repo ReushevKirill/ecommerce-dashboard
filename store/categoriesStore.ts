@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import type { ProductType } from '~/app/types/api'
 
-export const useProductStore = defineStore('product', () => {
-	const products = ref<ProductType[]>([])
+export const useCategoriesStore = defineStore('categories', () => {
+	const categories = ref<ProductType[]>([])
 	const isLoading = ref(false)
 	const error = ref(null)
 
@@ -10,11 +10,11 @@ export const useProductStore = defineStore('product', () => {
 		api: { baseURL },
 	} = useAppConfig()
 
-	async function fetchAllProducts() {
+	async function fetchAllCategories() {
 		try {
 			isLoading.value = true
-			const data: { products: ProductType[] } = await $fetch(
-				'/products?limit=0',
+			const data = await $fetch(
+				'/products/categories',
 				{
 					baseURL: baseURL,
 					method: 'GET',
@@ -23,7 +23,7 @@ export const useProductStore = defineStore('product', () => {
 					},
 				}
 			)
-			products.value = data?.products
+			categories.value = data
 		} catch (e: Error | any) {
 			error.value = e?.message
 		} finally {
@@ -34,9 +34,9 @@ export const useProductStore = defineStore('product', () => {
 	async function getAllCategories() {}
 
 	return {
-		products,
+		categories,
 		isLoading,
 		error,
-		fetchAllProducts,
+		fetchAllCategories,
 	}
 })
