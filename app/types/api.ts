@@ -67,3 +67,9 @@ export interface ProductType {
 	images: string[]
 	thumbnail: string
 }
+
+export interface ICategory {
+	slug: string
+	name: string
+	url: string
+}

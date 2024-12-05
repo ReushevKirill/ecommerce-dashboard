@@ -1,0 +1,19 @@
+.products__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px 8px;
+}
+
+.products__image {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+
+  img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}

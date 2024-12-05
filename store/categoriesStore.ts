@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import type { ProductType } from '~/app/types/api'
+import type { ICategory } from '~/app/types/api'
 
 export const useCategoriesStore = defineStore('categories', () => {
-	const categories = ref<ProductType[]>([])
+	const categories = ref<ICategory[]>([])
 	const isLoading = ref(false)
 	const error = ref(null)
 
@@ -23,15 +23,13 @@ export const useCategoriesStore = defineStore('categories', () => {
 					},
 				}
 			)
-			categories.value = data
+			categories.value = data as ICategory[]
 		} catch (e: Error | any) {
 			error.value = e?.message
 		} finally {
 			isLoading.value = false
 		}
 	}
-
-	async function getAllCategories() {}
 
 	return {
 		categories,

@@ -6,8 +6,8 @@
 </script>
 
 <template>
-	<div v-if="isLoading">Loading...</div>
-	<div v-else-if="error">{{ error }}</div>
+	<Loader v-if="isLoading"/>
+	<MyError v-else-if="error" :error="error" />
 	<div v-else>
 		<div v-for="product in products" :key="product.id">
 			<h3>{{ product.title }}</h3>
