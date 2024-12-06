@@ -14,14 +14,10 @@ import { useProductStore } from '~/store/productsStore'
 <template>
 	<Header />
 	<div class="app__content">
-		<LeftAside>
-			<CatalogTree />
-		</LeftAside>
+		<LeftAside />
 		<Main>
 			<slot />
 		</Main>
-		<RightAside>
-			<CatalogTree />
-		</RightAside>
+		<RightAside />
 	</div>
 </template>

@@ -1,0 +1,36 @@
+.aside {
+  --aside-maxWidth: auto;
+}
+
+.aside,
+.aside__sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+  max-width: var(--aside-maxWidth);
+}
+
+.aside__sidebar {
+	height: 100%;
+	max-height: calc(100% - var(--header-height) - 24px);
+	padding: 24px 0;
+	position: fixed;
+	z-index: 1;
+}
+
+.aside-left {
+	--aside-maxWidth: 264px;
+}
+
+.aside-right {
+	--aside-maxWidth: 416px;
+}
+
+.aside__content {
+	height: 100%;
+	min-height: 650px;
+	max-height: 900px;
+	background-color: var(--clr-white);
+	border-radius: 32px;
+}
