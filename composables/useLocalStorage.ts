@@ -15,8 +15,18 @@ export const useLocalStorage = () => {
         }
     }
 
+    function parseByKey(key: string) {
+        try {
+            if (!getItem(key)) return undefined
+            return JSON.parse(getItem(key)!)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return {
         getItem,
-        setItem
+        setItem,
+        parseByKey
     }
 }
