@@ -8,6 +8,7 @@ export const useCartStore = defineStore('cart', () => {
 
   function addToCartStore(product: ProductType) {
     cartItems.value.push(product)
+    addToLocalStorage(product)
   }
 
   function addToLocalStorage(product: ProductType) {
