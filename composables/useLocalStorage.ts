@@ -1,4 +1,5 @@
 export const useLocalStorage = () => {
+
     function getItem(key: string) {
         try {
             return localStorage.getItem(key)
@@ -15,7 +16,7 @@ export const useLocalStorage = () => {
         }
     }
 
-    function parseByKey(key: string) {
+    function parse(key: string) {
         try {
             if (!getItem(key)) return undefined
             return JSON.parse(getItem(key)!)
@@ -23,10 +24,31 @@ export const useLocalStorage = () => {
             console.log(e)
         }
     }
+    
+    function _setItemBase(key: string) {
+        return (value: any) => {
+            return setItem(key, value)
+        }
+    }
+
+    function _getItemBase(key: string) {
+        return () => {
+            return getItem(key)
+        }
+    }
+
+    function _parseBase(key: string) {
+        return () => {
+            return parse(key)
+        }
+    }
 
     return {
         getItem,
         setItem,
-        parseByKey
+        parse,
+        _getItemBase,
+        _setItemBase,
+        _parseBase
     }
 }

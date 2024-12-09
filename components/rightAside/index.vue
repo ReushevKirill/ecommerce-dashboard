@@ -2,6 +2,8 @@
 
 <template>
 	<Aside class="aside-right">
-		<Cart class="aside__content"/>
+		<ClientOnly fallback="Loading cart...">
+			<Cart class="aside__content"/>
+		</ClientOnly>
 	</Aside>
 </template>

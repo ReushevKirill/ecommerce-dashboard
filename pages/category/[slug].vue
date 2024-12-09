@@ -2,7 +2,7 @@
 	import type { ProductType } from '~/app/types/api'
 
 	const route = useRoute()
-	const { addToCartStore } = useCart()
+	const { addToCart } = useCart()
 
 	const {
 		api: { baseURL },
@@ -36,7 +36,7 @@
 					<h3 class="products__title">{{ product.title }}</h3>
 					<span class="products__price">{{ product.price }} $</span>
 					<div>
-						<button @click.prevent="addToCartStore(product)">Добавить в корзину</button>
+						<button @click.prevent="addToCart(product)">Добавить в корзину</button>
 					</div>
 				</NuxtLink>
 			</li>

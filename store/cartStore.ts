@@ -1,31 +1,46 @@
-import type { ProductType } from '~/app/types/api'
+import type { ProductType, ProductTypeCart } from '~/app/types/api'
 
 export const useCartStore = defineStore('cart', () => {
-  const cartItems = ref<ProductType[]>([])
-  const CART_KEY_LS: string = 'cart'
+  const defaultState: ProductTypeCart[] = []
 
-  const {setItem, getItem, parseByKey} = useLocalStorage()
+  const cartItems = ref<typeof defaultState>(defaultState)
 
-  function addToCartStore(product: ProductType) {
-    cartItems.value.push(product)
-    addToLocalStorage(product)
-  }
+	const { getCartLS, setCartLS, parseCartLS } = useCart()
+  
+	function saveToLocalStorage() {
+			return setCartLS(JSON.stringify(cartItems.value))
+	}
 
-  function addToLocalStorage(product: ProductType) {
-    if (!getItem(CART_KEY_LS)) {
-      return setItem(CART_KEY_LS, JSON.stringify([product]))
-    } else {
-      return setItem(CART_KEY_LS, JSON.stringify([...parseByKey(CART_KEY_LS), product]))
+	function deleteFromLocalStorage(products: ProductType[]) {
+		return setCartLS(JSON.stringify(products))
+	}
+
+  function addToCart(product: ProductType) {
+
+		if (product.stock === 0) return
+
+		const existingItem = cartItems.value.find(p => p.id === product.id)
+
+		if (!existingItem) {
+			cartItems.value.push({...product, quantity: 1})
+		} else if (existingItem?.quantity < existingItem.stock) {
+			existingItem.quantity++
+		}
+
+		saveToLocalStorage()
+	}
+
+  function deleteFromCart(id: number) {
+		cartItems.value = cartItems.value.filter(i => i.id !== id)
+		deleteFromLocalStorage(cartItems.value)
+	}
+
+  function loadFromLocalStorage() {
+    const savedCart = getCartLS()
+    if (savedCart) {
+      cartItems.value = parseCartLS()
     }
   }
 
-  function deleteFromCartStoreById(id: number) {
-    cartItems.value = cartItems.value.filter(i => i.id !== id)
-  }
-
-  function deleteFromLocalStorage(id: number) {
-    // 
-  }
-
-  return { cartItems, addToCartStore, deleteFromCartStoreById }
-});
+	return { cartItems, addToCart, deleteFromCart, loadFromLocalStorage }
+})

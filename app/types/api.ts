@@ -68,6 +68,10 @@ export interface ProductType {
 	thumbnail: string
 }
 
+export interface ProductTypeCart extends ProductType {
+	quantity: number
+}
+
 export interface ICategory {
 	slug: string
 	name: string
