@@ -2,9 +2,9 @@
 
 import { useCartStore } from '~/store/cartStore'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   if (import.meta.client) {
     const cartStore = useCartStore();
-    cartStore.loadFromLocalStorage()
+    await cartStore.loadCart()
   }
 });

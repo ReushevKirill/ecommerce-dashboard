@@ -1,6 +1,5 @@
-import type { EndpointsType } from '~/app/types/api'
 
-export default async function(endpoint: EndpointsType) {
-    const config = useRuntimeConfig()
-    return $fetch(`${config.public.apiBase}/${endpoint}`)
+export default async function(endpoint: string, options: object): Promise<any> {
+    const {api: {baseURL}} = useAppConfig()
+    return await $fetch(endpoint, {baseURL, ...options})
 }

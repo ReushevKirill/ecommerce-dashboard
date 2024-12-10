@@ -13,10 +13,9 @@ export const useProductStore = defineStore('product', () => {
 	async function fetchAllProducts() {
 		try {
 			isLoading.value = true
-			const data: { products: ProductType[] } = await $fetch(
+			const data: { products: ProductType[] } = await fetchFromAPI(
 				'/products?limit=0',
 				{
-					baseURL: baseURL,
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
