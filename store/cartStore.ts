@@ -9,10 +9,6 @@ export const useCartStore = defineStore('cart', () => {
 
 	const { getCartLS, setCartLS, parseCartLS } = useCart()
 
-	function saveToLocalStorage() {
-		return setCartLS(JSON.stringify(cart.value))
-	}
-
 	function getExistsItemById(id: number) {
 		return cart.value.products.find(i => i.id === id)
 	}
@@ -34,31 +30,57 @@ export const useCartStore = defineStore('cart', () => {
 		}
 	}
 
-	function addToCart(product: ProductType) {
+	async function addToCart(product: ProductType) {
 		if (product.stock === 0) return
 
 		const existingItem = getExistsItemById(product.id)
 
 		if (!existingItem) {
-			const reducedProduct = formingNewProduct(product)
-			cart.value.products.push(reducedProduct)
+			addProductById(product.id)
+			// cart.value.products.push(formingNewProduct(product))
 		} else if (existingItem?.quantity < product.stock) {
-			console.log(existingItem.quantity);
-			existingItem.quantity++
-			console.log(existingItem.quantity);
+			// existingItem.quantity++
 		}
 	}
+
+	async function addProductById(id: number) {
+		try {
+			const { data } = await useAsyncData('newProduct', () => {
+				return fetchFromAPI('/carts/1', {
+					headers: { 'Content-Type': 'application/json' },
+					method: 'PUT',
+					body: {
+						merge: true,
+						products: [
+							{
+								id,
+								quantity: 1,
+							},
+						],
+					},
+				})
+			})
+			console.log(data.value)
+		} catch (e: Error | any) {
+			console.log(e?.message)
+		}
+	}
+
+	async function updateProduct(product: ProductType) {}
 
 	function deleteFromCart(id: number) {
 		cart.value.products = cart.value.products.filter(i => i.id !== id)
 	}
 
-	function loadFromLocalStorage(): any {
-		const savedCart = getCartLS()
-		if (savedCart) {
-			return parseCartLS()
-		}
-	}
+	// function loadFromLocalStorage(): any {
+	// 	if (getCartLS()) {
+	// 		return parseCartLS()
+	// 	}
+	// }
+
+	// function saveToLocalStorage() {
+	// 	return setCartLS(JSON.stringify(cart.value))
+	// }
 
 	async function fetchCart() {
 		try {
@@ -77,9 +99,9 @@ export const useCartStore = defineStore('cart', () => {
 	async function loadCart() {
 		try {
 			isLoading.value = true
-			const localData = loadFromLocalStorage()
-			// const dataFetch = await fetchCart()
-			cart.value = localData
+			// const localData = loadFromLocalStorage()
+			const fetchData = await fetchCart()
+			cart.value = fetchData
 		} catch (e: Error | any) {
 			error.value = e?.message
 		} finally {
@@ -87,13 +109,13 @@ export const useCartStore = defineStore('cart', () => {
 		}
 	}
 
-	watch(
-		cart,
-		() => {
-			saveToLocalStorage()
-		},
-		{ deep: true }
-	)
+	// watch(
+	// 	cart,
+	// 	() => {
+	// 		saveToLocalStorage()
+	// 	},
+	// 	{ deep: true }
+	// )
 
 	return {
 		cart,
