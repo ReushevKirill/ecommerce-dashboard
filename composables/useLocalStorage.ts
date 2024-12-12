@@ -25,21 +25,21 @@ export const useLocalStorage = () => {
         }
     }
     
-    function _setItemBase(key: string) {
+    function _setItemBase<T>(key: string) {
         return (value: any) => {
-            return setItem(key, value)
+            return setItem(key, value) as T
         }
     }
 
-    function _getItemBase(key: string) {
+    function _getItemBase<T>(key: string) {
         return () => {
-            return getItem(key)
+            return getItem(key) as T
         }
     }
 
-    function _parseBase(key: string) {
+    function _parseBase<T>(key: string) {
         return () => {
-            return parse(key)
+            return parse(key) as T
         }
     }
 

@@ -85,7 +85,7 @@ export interface ICartItem {
 	quantity: number,
 	total: number,
 	discountPercentage: number,
-	discountedTotal: number,
+	discountedPrice: number,
 	thumbnail: string
 }
 

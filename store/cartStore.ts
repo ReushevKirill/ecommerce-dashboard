@@ -1,10 +1,19 @@
-import type { ICart, ProductType } from '~/app/types/api'
+import type { ICart, ICartItem, ProductType } from '~/app/types/api'
 
 export const useCartStore = defineStore('cart', () => {
 	const isLoading = ref(false)
 	const error = ref(null)
 
-	const cart = ref<ICart>({} as ICart)
+	const cart = ref<ICart>({
+		id: 1,
+		products: [],
+		total: 0,
+		discountedTotal: 0,
+		userId: 1,
+		totalProducts: 0,
+		totalQuantity: 0,
+	})
+
 	const cartItems = computed(() => cart.value?.products)
 
 	const { getCartLS, setCartLS, parseCartLS } = useCart()
@@ -13,20 +22,19 @@ export const useCartStore = defineStore('cart', () => {
 		return cart.value.products.find(i => i.id === id)
 	}
 
-	function formingNewProduct(product: ProductType) {
-		const { id, title, price, discountPercentage, thumbnail } = product
-		const newFields = {
-			quantity: 1,
-			total: price,
-			discountedTotal: calcDiscountProduct(price, discountPercentage),
-		}
+	function formingNewProduct(product: ProductType): ICartItem {
 		return {
-			...newFields,
-			id,
-			title,
-			price,
-			discountPercentage,
-			thumbnail,
+			id: product.id,
+			title: product.title,
+			price: product.price,
+			quantity: 1,
+			total: product.price,
+			discountPercentage: product.discountPercentage,
+			discountedPrice: calcDiscountProductPrice(
+				product.price,
+				product.discountPercentage
+			),
+			thumbnail: product.thumbnail,
 		}
 	}
 
@@ -36,55 +44,36 @@ export const useCartStore = defineStore('cart', () => {
 		const existingItem = getExistsItemById(product.id)
 
 		if (!existingItem) {
-			addProductById(product.id)
-			// cart.value.products.push(formingNewProduct(product))
+			addProduct(formingNewProduct(product))
 		} else if (existingItem?.quantity < product.stock) {
-			// existingItem.quantity++
+			console.log('update product')
 		}
 	}
 
-	async function addProductById(id: number) {
-		try {
-			const { data } = await useAsyncData('newProduct', () => {
-				return fetchFromAPI('/carts/1', {
-					headers: { 'Content-Type': 'application/json' },
-					method: 'PUT',
-					body: {
-						merge: true,
-						products: [
-							{
-								id,
-								quantity: 1,
-							},
-						],
-					},
-				})
-			})
-			console.log(data.value)
-		} catch (e: Error | any) {
-			console.log(e?.message)
-		}
+	function addProduct(product: ICartItem) {
+		cart.value.products.push(product)
 	}
 
-	async function updateProduct(product: ProductType) {}
+	async function saveCart() {
+		saveToLocalStorage()
+	}
 
 	function deleteFromCart(id: number) {
 		cart.value.products = cart.value.products.filter(i => i.id !== id)
 	}
 
-	// function loadFromLocalStorage(): any {
-	// 	if (getCartLS()) {
-	// 		return parseCartLS()
-	// 	}
-	// }
+	function loadFromLocalStorage() {
+		if (!getCartLS()) return null
+		return parseCartLS()
+	}
 
-	// function saveToLocalStorage() {
-	// 	return setCartLS(JSON.stringify(cart.value))
-	// }
+	function saveToLocalStorage() {
+		return setCartLS(JSON.stringify(cart.value))
+	}
 
 	async function fetchCart() {
 		try {
-			const data = await fetchFromAPI('/carts/1', {
+			const data = await useServerFetch<ICart>('/carts/1', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -99,9 +88,10 @@ export const useCartStore = defineStore('cart', () => {
 	async function loadCart() {
 		try {
 			isLoading.value = true
-			// const localData = loadFromLocalStorage()
-			const fetchData = await fetchCart()
-			cart.value = fetchData
+			const cartData = loadFromLocalStorage()
+			if (cartData) {
+				cart.value = cartData
+			}
 		} catch (e: Error | any) {
 			error.value = e?.message
 		} finally {
@@ -109,13 +99,13 @@ export const useCartStore = defineStore('cart', () => {
 		}
 	}
 
-	// watch(
-	// 	cart,
-	// 	() => {
-	// 		saveToLocalStorage()
-	// 	},
-	// 	{ deep: true }
-	// )
+	watch(
+		cart,
+		() => {
+			saveCart()
+		},
+		{ deep: true }
+	)
 
 	return {
 		cart,

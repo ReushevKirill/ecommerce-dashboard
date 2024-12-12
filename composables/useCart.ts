@@ -1,3 +1,4 @@
+import type { ICart } from '~/app/types/api'
 import { useCartStore } from '~/store/cartStore'
 
 export const useCart = () => {
@@ -8,9 +9,9 @@ export const useCart = () => {
 	const {_getItemBase, _setItemBase, _parseBase} = useLocalStorage()
   const CART_KEY_LS: string = 'cart'
 
-	const getCartLS = _getItemBase(CART_KEY_LS)
-	const setCartLS = _setItemBase(CART_KEY_LS)
-	const parseCartLS = _parseBase(CART_KEY_LS)
+	const getCartLS = _getItemBase<ICart>(CART_KEY_LS)
+	const setCartLS = _setItemBase<ICart>(CART_KEY_LS)
+	const parseCartLS = _parseBase<ICart>(CART_KEY_LS)
 
 	return {
 		cartItems,
