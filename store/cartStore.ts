@@ -1,4 +1,5 @@
 import type { ICart, ICartItem, ProductType } from '~/app/types/api'
+import { calcDiscountProductPrice } from '~/utils/productsUtils'
 
 export const useCartStore = defineStore('cart', () => {
 	const isLoading = ref(false)
@@ -22,30 +23,30 @@ export const useCartStore = defineStore('cart', () => {
 		return cart.value.products.find(i => i.id === id) ?? null
 	}
 
-	function formingNewProduct(product: ProductType): ICartItem {
+	function formingNewProduct(p: ProductType): ICartItem {
 		return {
-			id: product.id,
-			title: product.title,
-			price: product.price,
+			id: p.id,
+			title: p.title,
+			price: p.price,
 			quantity: 1,
-			total: product.price,
-			discountPercentage: product.discountPercentage,
+			total: p.price,
+			discountPercentage: p.discountPercentage,
 			discountedPrice: calcDiscountProductPrice(
-				product.price,
-				product.discountPercentage
+				p.price,
+				p.discountPercentage
 			),
-			thumbnail: product.thumbnail,
+			thumbnail: p.thumbnail,
 		}
 	}
 
-	async function addToCart(product: ProductType) {
-		if (product.stock === 0) return
+	async function addToCart(p: ProductType) {
+		if (p.stock === 0) return
 
-		const existingItem = getExistsItemById(product.id)
+		const existingItem = getExistsItemById(p.id)
 
 		if (!existingItem) {
-			addProduct(formingNewProduct(product))
-		} else if (existingItem?.quantity < product.stock) {
+			addProduct(formingNewProduct(p))
+		} else if (existingItem?.quantity < p.stock) {
 			updateProduct(existingItem)
 		}
 	}
