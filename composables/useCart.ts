@@ -7,8 +7,12 @@ export const useCart = () => {
 	const { addToCart, deleteFromCart } = cartStore
 
 	const {_getItemBase, _setItemBase, _parseBase} = useLocalStorage()
-  const CART_KEY_LS: string = 'cart'
+  const CART_KEY_LS = 'cart'
 
+	// Cart calculations
+	// function reduce
+
+	// LocalStorage methods
 	const getCartLS = _getItemBase<ICart>(CART_KEY_LS)
 	const setCartLS = _setItemBase<ICart>(CART_KEY_LS)
 	const parseCartLS = _parseBase<ICart>(CART_KEY_LS)

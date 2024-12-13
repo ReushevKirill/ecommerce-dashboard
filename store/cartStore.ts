@@ -2,7 +2,7 @@ import type { ICart, ICartItem, ProductType } from '~/app/types/api'
 
 export const useCartStore = defineStore('cart', () => {
 	const isLoading = ref(false)
-	const error = ref(null)
+	const error = ref<Error | null>(null)
 
 	const cart = ref<ICart>({
 		id: 1,
@@ -19,7 +19,7 @@ export const useCartStore = defineStore('cart', () => {
 	const { getCartLS, setCartLS, parseCartLS } = useCart()
 
 	function getExistsItemById(id: number) {
-		return cart.value.products.find(i => i.id === id)
+		return cart.value.products.find(i => i.id === id) ?? null
 	}
 
 	function formingNewProduct(product: ProductType): ICartItem {
@@ -46,16 +46,16 @@ export const useCartStore = defineStore('cart', () => {
 		if (!existingItem) {
 			addProduct(formingNewProduct(product))
 		} else if (existingItem?.quantity < product.stock) {
-			console.log('update product')
+			updateProduct(existingItem)
 		}
+	}
+
+	function updateProduct(item: ICartItem) {
+		return item.quantity++
 	}
 
 	function addProduct(product: ICartItem) {
 		cart.value.products.push(product)
-	}
-
-	async function saveCart() {
-		saveToLocalStorage()
 	}
 
 	function deleteFromCart(id: number) {
@@ -71,18 +71,29 @@ export const useCartStore = defineStore('cart', () => {
 		return setCartLS(JSON.stringify(cart.value))
 	}
 
-	async function fetchCart() {
-		try {
-			const data = await useServerFetch<ICart>('/carts/1', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-			return data
-		} catch (e: Error | any) {
-			error.value = e?.message
-		}
+	function updateCartCalculations() {
+		const total = cart.value.products.reduce(
+			(sum, item) => sum + item.price * item.quantity,
+			0
+		)
+		const discountedTotal = cart.value.products.reduce(
+			(sum, item) => sum + item.discountedPrice * item.quantity,
+			0
+		)
+		const totalProducts = cart.value.products.length
+		const totalQuantity = cart.value.products.reduce(
+			(sum, item) => sum + item.quantity,
+			0
+		)
+
+		cart.value.total = total
+		cart.value.discountedTotal = discountedTotal
+		cart.value.totalProducts = totalProducts
+		cart.value.totalQuantity = totalQuantity
+	}
+
+	async function saveCart() {
+		saveToLocalStorage()
 	}
 
 	async function loadCart() {
@@ -100,8 +111,9 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	watch(
-		cart,
+		() => cart.value.products,
 		() => {
+			updateCartCalculations()
 			saveCart()
 		},
 		{ deep: true }
