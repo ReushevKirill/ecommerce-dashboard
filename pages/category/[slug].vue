@@ -2,7 +2,6 @@
 	import type { ProductType } from '~/app/types/api'
 
 	const route = useRoute()
-	const { addToCart } = useCart()
 
 	const {
 		api: { baseURL },
@@ -22,24 +21,11 @@
 </script>
 
 <template>
-	<NuxtLink to="/">to home</NuxtLink>
-	<div class="products">
-		<ul class="products__list">
-			<li
-				class="products__item"
-				v-for="product in cat?.products"
-				:key="product.id">
-				<NuxtLink :to="`/product/${product.id}`">
-					<div class="products__image">
-						<img :src="product.images[0]" :alt="product.title" />
-					</div>
-					<h3 class="products__title">{{ product.title }}</h3>
-					<span class="products__price">{{ product.price }} $</span>
-					<div>
-						<button @click.prevent="addToCart(product)">Добавить в корзину</button>
-					</div>
-				</NuxtLink>
-			</li>
-		</ul>
-	</div>
+	<template v-if="status === 'success' && cat">
+		<NuxtLink to="/">to home</NuxtLink>
+		<ProductsList :items="cat.products"/>
+	</template>
+	<template v-else>
+		<Loader />
+	</template>
 </template>

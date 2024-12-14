@@ -93,10 +93,6 @@ export const useCartStore = defineStore('cart', () => {
 		cart.value.totalQuantity = totalQuantity
 	}
 
-	async function saveCart() {
-		saveToLocalStorage()
-	}
-
 	async function loadCart() {
 		try {
 			isLoading.value = true
@@ -111,11 +107,15 @@ export const useCartStore = defineStore('cart', () => {
 		}
 	}
 
+	function onUpdateCart() {
+		updateCartCalculations()
+		saveToLocalStorage()
+	}
+
 	watch(
 		() => cart.value.products,
 		() => {
-			updateCartCalculations()
-			saveCart()
+			onUpdateCart()
 		},
 		{ deep: true }
 	)
