@@ -10,19 +10,21 @@
 		}
 	)
 
-	const { addToCart } = useCart()
+	const { addToCart, deleteFromCart } = useCart()
 
 	const isAddedToCart = ref(false)
 	const isNotStock = ref(false)
+	const addedCount = ref(0)
 
 	async function addHandler(data: ProductType) {
 		const value = await addToCart(data)
 
 		if (value === -1) {
-			isNotStock.value = true
-		} else if (value) {
-			
-		} 
+			return isNotStock.value = true
+		} else {
+			addedCount.value = value
+			isAddedToCart.value = true
+		}
 	}
 </script>
 <template>
@@ -34,7 +36,16 @@
 			<h3 class="products__title">{{ data.title }}</h3>
 			<span class="products__price">{{ data.price }} $</span>
 			<div>
-				<button @click.prevent="addToCart(data)">Добавить в корзину</button>
+				<template v-if="!isAddedToCart">	
+					<button @click.prevent="addHandler(data)">add to cart</button>
+				</template>
+				<template v-else>	
+					<div>
+						<button @click.prevent="deleteFromCart(data.id)">-</button>
+						<div>{{ addedCount }}</div>
+						<button @click.prevent="addHandler(data)">+</button>
+					</div>
+				</template>
 			</div>
 		</NuxtLink>
 	</li>
