@@ -31,24 +31,27 @@ export const useCartStore = defineStore('cart', () => {
 			quantity: 1,
 			total: p.price,
 			discountPercentage: p.discountPercentage,
-			discountedPrice: calcDiscountProductPrice(
-				p.price,
-				p.discountPercentage
-			),
+			discountedPrice: calcDiscountProductPrice(p.price, p.discountPercentage),
 			thumbnail: p.thumbnail,
 		}
 	}
 
 	async function addToCart(p: ProductType) {
-		if (p.stock === 0) return
+		let returnedValue = -1
+		if (p.stock === 0) return returnedValue
 
 		const existingItem = getExistsItemById(p.id)
 
 		if (!existingItem) {
-			addProduct(formingNewProduct(p))
+			const newProduct = formingNewProduct(p)
+			addProduct(newProduct)
+			returnedValue = newProduct.quantity
 		} else if (existingItem?.quantity < p.stock) {
 			updateProduct(existingItem)
+			returnedValue = existingItem.quantity
 		}
+
+		return returnedValue
 	}
 
 	function updateProduct(item: ICartItem) {

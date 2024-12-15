@@ -11,6 +11,19 @@
 	)
 
 	const { addToCart } = useCart()
+
+	const isAddedToCart = ref(false)
+	const isNotStock = ref(false)
+
+	async function addHandler(data: ProductType) {
+		const value = await addToCart(data)
+
+		if (value === -1) {
+			isNotStock.value = true
+		} else if (value) {
+			
+		} 
+	}
 </script>
 <template>
 	<li class="products__item">
