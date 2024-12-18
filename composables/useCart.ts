@@ -4,7 +4,7 @@ import { useCartStore } from '~/store/cartStore'
 export const useCart = () => {
 	const cartStore = useCartStore()
 	const { cartItems } = storeToRefs(cartStore)
-	const { addToCart, deleteFromCart } = cartStore
+	const { addToCart, removeProduct } = cartStore
 
 	const {_getItemBase, _setItemBase, _parseBase} = useLocalStorage()
   const CART_KEY_LS = 'cart'
@@ -20,7 +20,7 @@ export const useCart = () => {
 	return {
 		cartItems,
 		addToCart,
-		deleteFromCart,
+		removeProduct,
 		getCartLS,
 		setCartLS,
 		parseCartLS

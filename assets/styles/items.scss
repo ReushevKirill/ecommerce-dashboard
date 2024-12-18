@@ -1,10 +1,11 @@
 // macro components
-@use '../styles/components/header';
-@use '../styles/components/main';
-@use '../styles/components/aside';
-@use '../styles/components/footer';
+@use './components/header';
+@use './components/main';
+@use './components/aside';
+@use './components/footer';
 
 // micro components
-@use '../styles/components/loader';
-@use '../styles/components/catalog-tree';
-@use '../styles/components/products';
+@use './components/loader';
+@use './components/catalog-tree';
+@use './components/products';
+@use './components/cart';

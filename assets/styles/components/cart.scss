@@ -1,0 +1,18 @@
+// @use '../mixins' as *;
+
+.cart {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  padding: 12px 0;
+  display: flex;
+}
+
+.cart-item__img {
+  width: min(100%, 83px);
+  aspect-ratio: 1;
+
+  // @include img-relative();
+}

@@ -10,7 +10,7 @@
 		}
 	)
 
-	const { addToCart, deleteFromCart } = useCart()
+	const { addToCart, removeProduct } = useCart()
 
 	const isAddedToCart = ref(false)
 	const isNotStock = ref(false)
@@ -41,7 +41,7 @@
 				</template>
 				<template v-else>	
 					<div>
-						<button @click.prevent="deleteFromCart(data.id)">-</button>
+						<button @click.prevent="removeProduct(data.id)">-</button>
 						<div>{{ addedCount }}</div>
 						<button @click.prevent="addHandler(data)">+</button>
 					</div>

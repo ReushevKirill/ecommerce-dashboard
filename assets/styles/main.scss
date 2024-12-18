@@ -1,6 +1,5 @@
-@use '../styles/reset';
-@use '../styles/variables';
-@use '../styles/mixins';
-@use '../styles/v-theme/styles';
-@use '../styles/globals';
-@use '../styles/items';
+@use 'reset';
+@use 'variables';
+@use 'v-theme/styles';
+@use 'globals';
+@use 'items';
