@@ -33,6 +33,7 @@ export const useCartStore = defineStore('cart', () => {
 			discountPercentage: p.discountPercentage,
 			discountedPrice: calcDiscountProductPrice(p.price, p.discountPercentage),
 			thumbnail: p.thumbnail,
+			stock: p.stock,
 		}
 	}
 
@@ -62,8 +63,23 @@ export const useCartStore = defineStore('cart', () => {
 		cart.value.products.push(product)
 	}
 
+	function plusQuantity(item: ICartItem) {
+		if (item.stock > item.quantity) {
+			item.quantity++
+		}
+	}
+	
+
 	function removeProduct(id: number) {
 		cart.value.products = cart.value.products.filter(i => i.id !== id)
+	}
+
+	function minusQuantity(item: ICartItem) {
+		if (item.quantity > 1) {
+			item.quantity--
+		} else {
+			removeProduct(item.id)
+		}
 	}
 
 	function loadFromLocalStorage() {
@@ -131,5 +147,7 @@ export const useCartStore = defineStore('cart', () => {
 		addToCart,
 		removeProduct,
 		loadCart,
+		minusQuantity,
+		plusQuantity
 	}
 })

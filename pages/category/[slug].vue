@@ -23,7 +23,9 @@
 <template>
 	<template v-if="status === 'success' && cat">
 		<NuxtLink to="/">to home</NuxtLink>
-		<ProductsList :items="cat.products"/>
+		<ClientOnly>
+			<ProductsList :items="cat.products" />
+		</ClientOnly>
 	</template>
 	<template v-else>
 		<Loader />

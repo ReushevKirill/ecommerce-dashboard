@@ -87,6 +87,7 @@ export interface ICartItem {
 	discountPercentage: number,
 	discountedPrice: number,
 	thumbnail: string
+	stock: number
 }
 
 export interface ICategory {

@@ -10,22 +10,9 @@
 		}
 	)
 
-	const { addToCart, removeProduct } = useCart()
+	const { addToCart, cartItems, minusQuantity, plusQuantity } = useCart()
 
-	const isAddedToCart = ref(false)
-	const isNotStock = ref(false)
-	const addedCount = ref(0)
-
-	async function addHandler(data: ProductType) {
-		const value = await addToCart(data)
-
-		if (value === -1) {
-			return isNotStock.value = true
-		} else {
-			addedCount.value = value
-			isAddedToCart.value = true
-		}
-	}
+	const cartItem = computed(() => cartItems.value.find(i => i.id === props.data.id))
 </script>
 <template>
 	<li class="products__item">
@@ -36,15 +23,15 @@
 			<h3 class="products__title">{{ data.title }}</h3>
 			<span class="products__price">{{ data.price }} $</span>
 			<div>
-				<template v-if="!isAddedToCart">	
-					<button @click.prevent="addHandler(data)">add to cart</button>
+				<template v-if="cartItem">	
+					<div>
+						<button @click.prevent="minusQuantity(cartItem)">-</button>
+						<div>{{ cartItem?.quantity }}</div>
+						<button @click.prevent="plusQuantity(cartItem)">+</button>
+					</div>
 				</template>
 				<template v-else>	
-					<div>
-						<button @click.prevent="removeProduct(data.id)">-</button>
-						<div>{{ addedCount }}</div>
-						<button @click.prevent="addHandler(data)">+</button>
-					</div>
+					<button @click.prevent="addToCart(data)">add to cart</button>
 				</template>
 			</div>
 		</NuxtLink>

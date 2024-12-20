@@ -1,4 +1,4 @@
-// @use '../mixins' as *;
+@use '../mixins' as *;
 
 .cart {
   display: flex;
@@ -14,5 +14,15 @@
   width: min(100%, 83px);
   aspect-ratio: 1;
 
-  // @include img-relative();
+  @include img-relative();
+}
+
+.cart-item__counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-item__counter-btn {
+  cursor: pointer;
 }

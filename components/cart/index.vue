@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	const { cartItems, removeProduct } = useCart()
+	const { cartItems, minusQuantity, plusQuantity } = useCart()
 </script>
 
 <template>
@@ -12,7 +12,11 @@
 				<div class="cart-item__content">
 					<span>{{ item.title }}</span>
 					<div class="cart-item__footer">
-						<button @click="removeProduct(item.id)">Удалить</button>
+						<div class="cart-item__counter">
+							<div class="cart-item__counter-btn" @click="minusQuantity(item)">-</div>
+							<div class="cart-item__counter-count">{{ item.quantity }}</div>
+							<div class="cart-item__counter-btn" @click="plusQuantity(item)">+</div>
+						</div>
 						<span>{{ item.price }}</span>
 					</div>
 				</div>

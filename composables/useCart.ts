@@ -4,10 +4,10 @@ import { useCartStore } from '~/store/cartStore'
 export const useCart = () => {
 	const cartStore = useCartStore()
 	const { cartItems } = storeToRefs(cartStore)
-	const { addToCart, removeProduct } = cartStore
+	const { addToCart, removeProduct, minusQuantity, plusQuantity } = cartStore
 
-	const {_getItemBase, _setItemBase, _parseBase} = useLocalStorage()
-  const CART_KEY_LS = 'cart'
+	const { _getItemBase, _setItemBase, _parseBase } = useLocalStorage()
+	const CART_KEY_LS = 'cart'
 
 	// Cart calculations
 	// function reduce
@@ -23,6 +23,8 @@ export const useCart = () => {
 		removeProduct,
 		getCartLS,
 		setCartLS,
-		parseCartLS
+		parseCartLS,
+		minusQuantity,
+		plusQuantity
 	}
 }
