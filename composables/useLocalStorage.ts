@@ -26,7 +26,7 @@ export const useLocalStorage = () => {
     }
     
     function _setItemBase<T>(key: string) {
-        return (value: any) => {
+        return (value: string) => {
             return setItem(key, value) as T
         }
     }

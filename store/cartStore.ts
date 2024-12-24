@@ -7,7 +7,7 @@ export const useCartStore = defineStore('cart', () => {
 
 	const cart = ref<ICart>({
 		id: 1,
-		products: [],
+		products: new Map<number, ICartItem>(),
 		total: 0,
 		discountedTotal: 0,
 		userId: 1,
@@ -16,11 +16,14 @@ export const useCartStore = defineStore('cart', () => {
 	})
 
 	const cartItems = computed(() => cart.value?.products)
+	const cartItemsValues = computed(() =>
+		Array.from(cart.value?.products.values())
+	)
 
 	const { getCartLS, setCartLS, parseCartLS } = useCart()
 
 	function getExistsItemById(id: number) {
-		return cart.value.products.find(i => i.id === id) ?? null
+		return cart.value.products.get(id) ?? null
 	}
 
 	function formingNewProduct(p: ProductType): ICartItem {
@@ -60,7 +63,7 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	function addProduct(product: ICartItem) {
-		cart.value.products.push(product)
+		cart.value.products.set(product.id, product)
 	}
 
 	function plusQuantity(item: ICartItem) {
@@ -68,10 +71,9 @@ export const useCartStore = defineStore('cart', () => {
 			item.quantity++
 		}
 	}
-	
 
 	function removeProduct(id: number) {
-		cart.value.products = cart.value.products.filter(i => i.id !== id)
+		return cart.value.products.delete(id)
 	}
 
 	function minusQuantity(item: ICartItem) {
@@ -82,32 +84,47 @@ export const useCartStore = defineStore('cart', () => {
 		}
 	}
 
+	function restoreProducts(products: Record<string, ICartItem>) {
+		return new Map(Object.entries(products).map(([k, v]) => [Number(k), v]))
+	}
+
 	function loadFromLocalStorage() {
 		if (!getCartLS()) return null
-		return parseCartLS()
+
+		const parsedCart = parseCartLS()
+		parsedCart.products = restoreProducts(
+			parsedCart.products as unknown as Record<string, ICartItem>
+		)
+
+		return parsedCart
 	}
 
 	function saveToLocalStorage() {
-		return setCartLS(JSON.stringify(cart.value))
+		return setCartLS(
+			JSON.stringify({
+				...cart.value,
+				products: Object.fromEntries(cartItems.value),
+			})
+		)
 	}
 
 	function updateCartCalculations() {
-		const total = cart.value.products.reduce(
+		const total = cartItemsValues.value.reduce(
 			(sum, item) => sum + item.price * item.quantity,
 			0
 		)
-		const discountedTotal = cart.value.products.reduce(
+		const discountedTotal = cartItemsValues.value.reduce(
 			(sum, item) => sum + item.discountedPrice * item.quantity,
 			0
 		)
-		const totalProducts = cart.value.products.length
-		const totalQuantity = cart.value.products.reduce(
+		const totalProducts = cart.value.products.size
+		const totalQuantity = cartItemsValues.value.reduce(
 			(sum, item) => sum + item.quantity,
 			0
 		)
 
-		cart.value.total = total
-		cart.value.discountedTotal = discountedTotal
+		cart.value.total = Math.floor(total)
+		cart.value.discountedTotal = Math.floor(discountedTotal)
 		cart.value.totalProducts = totalProducts
 		cart.value.totalQuantity = totalQuantity
 	}
@@ -148,6 +165,7 @@ export const useCartStore = defineStore('cart', () => {
 		removeProduct,
 		loadCart,
 		minusQuantity,
-		plusQuantity
+		plusQuantity,
+		cartItemsValues,
 	}
 })

@@ -10,9 +10,8 @@
 		}
 	)
 
-	const { addToCart, cartItems, minusQuantity, plusQuantity } = useCart()
-
-	const cartItem = computed(() => cartItems.value.find(i => i.id === props.data.id))
+	const { addToCart, minusQuantity, plusQuantity, cartItems } = useCart()
+	const cartItem = computed(() => cartItems.value.get(props.data.id) ?? null)
 </script>
 <template>
 	<li class="products__item">
@@ -23,14 +22,14 @@
 			<h3 class="products__title">{{ data.title }}</h3>
 			<span class="products__price">{{ data.price }} $</span>
 			<div>
-				<template v-if="cartItem">	
+				<template v-if="cartItem">
 					<div>
 						<button @click.prevent="minusQuantity(cartItem)">-</button>
 						<div>{{ cartItem?.quantity }}</div>
 						<button @click.prevent="plusQuantity(cartItem)">+</button>
 					</div>
 				</template>
-				<template v-else>	
+				<template v-else>
 					<button @click.prevent="addToCart(data)">add to cart</button>
 				</template>
 			</div>
