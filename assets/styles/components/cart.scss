@@ -17,6 +17,10 @@
   @include img-relative();
 }
 
+.cart-item__title {
+  font-size: 13px;
+}
+
 .cart-item__counter {
   display: flex;
   align-items: center;

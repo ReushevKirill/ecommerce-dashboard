@@ -10,7 +10,7 @@
 		}
 	)
 
-	const { addToCart, minusQuantity, plusQuantity, cartItems } = useCart()
+	const { addToCart, minusQuantity, plusQuantity, cartItems, removeProduct } = useCart()
 	const cartItem = computed(() => cartItems.value.get(props.data.id) ?? null)
 </script>
 <template>
