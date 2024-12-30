@@ -12,6 +12,9 @@
 
 	const { minusQuantity, plusQuantity, cartItems, addToCart } = useCart()
 	const cartItem = computed(() => cartItems.value.get(props.data.id) ?? null)
+	const isNotAvailableForAdding = computed(
+		() => cartItem.value?.quantity === props.data.stock
+	)
 
 	function plusHandler() {
 		return cartItem.value ? plusQuantity(cartItem.value) : addToCart(props.data)
@@ -23,14 +26,23 @@
 			<div class="products__image">
 				<img :src="data.images[0]" :alt="data.title" />
 				<div :class="['products__overlay', { show: cartItem }]">
-					{{ cartItem ? cartItem.quantity : '' }}
+					<div v-if="cartItem" class="products__overlay-wrapper">
+						<div class="products__overlay-count">{{ cartItem.quantity }}</div>
+						<div
+							class="products__overlay-text"
+							v-show="isNotAvailableForAdding">
+							Not anymore
+						</div>
+					</div>
 				</div>
 			</div>
 			<h3 class="products__title">
 				{{ data.title }}
 			</h3>
 			<div class="products__footer">
-				<div :class="['products__btn', { active: cartItem }]">
+				<div
+					:class="['products__btn', { active: cartItem }]"
+					@click.prevent="() => {}">
 					<Icon
 						name="mdi:minus"
 						@click.prevent="minusQuantity(cartItem)"
@@ -42,7 +54,10 @@
 					<Icon
 						name="mdi:plus"
 						@click.prevent="plusHandler"
-						class="products__btn-action" />
+						:class="[
+							'products__btn-action',
+							{ disabled: isNotAvailableForAdding },
+						]" />
 				</div>
 			</div>
 		</NuxtLink>

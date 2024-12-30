@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-	const { cartItems } = useCart()
+	const { cartIsNotEmpty } = useCart()
 </script>
 
 <template>
 	<div class="cart">
-		<template v-if="cartItems?.size > 0">
-			<CartItem v-for="item in cartItems.values()" :key="item.id" :data="item"/>
+		<!-- !TODO <CartHeader /> -->
+		<div>HEADER</div>
+		<template v-if="cartIsNotEmpty">
+			<CartPreview />
 		</template>
 		<template v-else>
-			<b>Корзина пуста</b>
+			<CartGreeting />
 		</template>
 	</div>
 </template>

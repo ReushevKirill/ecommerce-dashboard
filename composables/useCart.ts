@@ -9,6 +9,8 @@ export const useCart = () => {
 	const { _getItemBase, _setItemBase, _parseBase } = useLocalStorage()
 	const CART_KEY_LS = 'cart'
 
+	const cartIsNotEmpty = computed(() => cartItems.value.size > 0)
+
 	// Cart calculations
 	// function reduce
 
@@ -27,6 +29,7 @@ export const useCart = () => {
 		minusQuantity,
 		plusQuantity,
 		cart,
-		cartItemsValues
+		cartItemsValues,
+		cartIsNotEmpty
 	}
 }
