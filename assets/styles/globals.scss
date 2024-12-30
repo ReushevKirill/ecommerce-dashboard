@@ -1,17 +1,28 @@
+*, *::before, *::after {
+	color: inherit;
+}
+
 body {
-  background: rgb(var(--v-theme-background));
+	background: var(--clr-bgPrimary);
+	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+	color: var(--clr-textPrimary);
 }
 
 .app__container {
-  width: var(--app-widthContainer);
-  position: relative;
-  margin-inline: auto;
+	width: var(--app-widthContainer);
+	position: relative;
+	margin-inline: auto;
 }
 
 .app__content {
-  position: relative;
-  top: var(--header-height);
-  display: flex;
-  justify-content: center;
-  gap: 16px;
+	position: relative;
+	top: var(--header-height);
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+}
+
+.icon {
+	color: inherit;
+	font-size: 16px;
 }

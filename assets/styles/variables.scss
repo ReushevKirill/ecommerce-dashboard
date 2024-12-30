@@ -3,14 +3,23 @@
 	// simple colors
 	--clr-white: #fff;
 	--clr-black: #000;
+	--clr-red: #ff0000;
+	--clr-crusta: #ff7d31;
 	--clr-concrete: #f2f2f2;
+	--clr-silverChalice: #a6a6a6;
 
 	// system colors
-	--clr-primary: #ff7d31;
+	--clr-primary: var(--clr-crusta);
+	--clr-dark: #404040;
+	
+	--clr-grey1: #595959;
+	--clr-grey4: var(--clr-concrete);
+	
+	--clr-textPrimary: var(--clr-dark);
 	--clr-bgPrimary: var(--clr-concrete);
 
 	// components colors
-	--clr-error: #ff0000;
+	--clr-error: var(--clr-red);
 
 	// app settings
 	--app-widthMax: 1900px;

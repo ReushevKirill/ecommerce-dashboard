@@ -8,3 +8,7 @@ export function calcDiscountProductPrice(
 export function calcTotalProductPrice(quantity: number, price: number) {
 	return Math.floor(price * quantity)
 }
+
+export function formatPrice(price: number) {
+	return `${Math.round(price)} $`
+}

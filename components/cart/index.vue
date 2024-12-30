@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	const { cartItems, minusQuantity, plusQuantity, removeProduct } = useCart()
+	const { cartItems } = useCart()
 </script>
 
 <template>

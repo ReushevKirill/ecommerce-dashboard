@@ -30,7 +30,7 @@ export const useCartStore = defineStore('cart', () => {
 		return {
 			id: p.id,
 			title: p.title,
-			price: p.price,
+			price: Math.round(p.price),
 			quantity: 1,
 			total: p.price,
 			discountPercentage: p.discountPercentage,

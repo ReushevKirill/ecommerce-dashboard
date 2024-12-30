@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/icon": "^1.10.3",
     "@nuxt/image": "^1.8.1",
     "@pinia/nuxt": "^0.8.0",
     "defu": "^6.1.4",
@@ -20,6 +21,7 @@
     "vuetify-nuxt-module": "^0.18.3"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.2.2",
     "sass": "^1.81.0",
     "sass-loader": "^16.0.3"
   }

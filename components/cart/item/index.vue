@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 	import type { ICartItem } from '~/app/types/api'
 
-	const { minusQuantity, plusQuantity, removeProduct } = useCart()
+	const { removeProduct } = useCart()
 
 	const props = withDefaults(
 		defineProps<{
@@ -24,20 +24,19 @@
 				loading="lazy" />
 		</div>
 		<div class="cart-item__content">
-			<span class="cart-item__title">{{ data.title }}</span>
+			<span class="cart-item__title">
+				{{ data.title }}
+			</span>
 			<div class="cart-item__footer">
-				<div class="cart-item__counter">
-					<div class="cart-item__counter-btn" @click="minusQuantity(data)">
-						-
-					</div>
-					<div class="cart-item__counter-count">{{ data.quantity }}</div>
-					<div class="cart-item__counter-btn" @click="plusQuantity(data)">
-						+
-					</div>
-					<button @click="removeProduct(data.id)">delete</button>
-				</div>
-				<span>{{ data.price }}</span>
+				<CartItemCounter :data="data" />
+				<span class="cart-item__price">
+					{{ formatPrice(data.price) }}
+				</span>
 			</div>
 		</div>
+		<Icon
+			name="mdi:close"
+			class="cart-item__remove"
+			@click="removeProduct(data.id)" />
 	</div>
 </template>

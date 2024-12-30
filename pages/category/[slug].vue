@@ -10,7 +10,6 @@
 	const {
 		data: cat,
 		status,
-		error,
 	} = await useAsyncData<{ products: ProductType[] }>(
 		`category-${route.params.slug}`,
 		() =>
