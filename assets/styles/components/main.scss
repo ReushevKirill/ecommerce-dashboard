@@ -1,6 +1,7 @@
 .main {
-  max-width: 1144px;
-  width: 100%;
+  width: min(100%, 1144px);
+  display: flex;
+  flex-direction: column;
 }
 
 .main__header {

@@ -1,12 +1,17 @@
 @use '../mixins' as *;
 
 .cart {
-  padding: 16px 16px 170px;
+  min-height: auto;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overscroll-behavior-y: contain;
   scrollbar-width: none;
+}
+
+.cart-items {
+  flex-grow: 1;
 }
 
 .cart-item {
@@ -75,4 +80,21 @@
   font-weight: 600;
   white-space: nowrap;
   letter-spacing: -1px;
+}
+
+.cart-greeting {
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  white-space: pre-wrap;
+}
+
+.cart-greeting__text {
+  text-align: center;
+  font-weight: 700;
+  color: var(--clr-grey2);
+  white-space: pre-wrap;
 }

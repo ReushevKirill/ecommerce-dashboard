@@ -2,7 +2,9 @@
 
 <template>
 	<div class="cart-greeting">
-    <div>Корзина пуста</div>
-    <button>Продолжить</button>
+		<span class="cart-greeting__text">
+			Соберите корзину,<br />чтобы сделать заказ
+		</span>
 	</div>
+	<Button variant="primary" disabled> Продолжить </Button>
 </template>

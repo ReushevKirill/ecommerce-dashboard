@@ -4,8 +4,7 @@
 
 <template>
 	<div class="cart">
-		<!-- !TODO <CartHeader /> -->
-		<div>HEADER</div>
+		<CartHeader />
 		<template v-if="cartIsNotEmpty">
 			<CartPreview />
 		</template>
