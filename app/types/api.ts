@@ -70,7 +70,7 @@ export interface ProductType {
 
 export interface ICart {
 	id: number,
-	products: Map<number, ICartItem>,
+	products: Record<number, ICartItem>,
 	total: number
 	discountedTotal: number
 	userId: number

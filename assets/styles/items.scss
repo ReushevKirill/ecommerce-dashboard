@@ -5,8 +5,10 @@
 @use './components/footer';
 
 // micro components
+@use './components/text';
 @use './components/btn';
 @use './components/loader';
 @use './components/catalog-tree';
 @use './components/products';
 @use './components/cart';
+@use './components/order';

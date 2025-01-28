@@ -7,7 +7,7 @@ export const useCartStore = defineStore('cart', () => {
 
 	const cart = ref<ICart>({
 		id: 1,
-		products: new Map<number, ICartItem>(),
+		products: {} as Record<number, ICartItem>,
 		total: 0,
 		discountedTotal: 0,
 		userId: 1,
@@ -16,14 +16,11 @@ export const useCartStore = defineStore('cart', () => {
 	})
 
 	const cartItems = computed(() => cart.value?.products)
-	const cartItemsValues = computed(() =>
-		Array.from(cart.value?.products.values())
-	)
 
 	const { getCartLS, setCartLS, parseCartLS } = useCart()
 
 	function getExistsItemById(id: number) {
-		return cart.value.products.get(id) ?? null
+		return cart.value.products[id] ?? null
 	}
 
 	function formingNewProduct(p: ProductType): ICartItem {
@@ -63,9 +60,10 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	function addProduct(product: ICartItem) {
-		cart.value.products.set(product.id, product)
+		cart.value.products[product.id] = product
 	}
 
+	// TODO переписать plusQuantity и minusQuantity
 	function plusQuantity(item: ICartItem) {
 		if (item.stock > item.quantity) {
 			item.quantity++
@@ -73,7 +71,16 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	function removeProduct(id: number) {
-		return cart.value.products.delete(id)
+		if (!cart.value.products[id]) return false
+
+		// Создаём новый объект для триггера реактивности
+		const newProducts = { ...cart.value.products }
+		delete newProducts[id]
+
+		cart.value.products = newProducts
+		updateCartCalculations()
+
+		return true
 	}
 
 	function minusQuantity(item: ICartItem) {
@@ -85,16 +92,16 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	function restoreProducts(products: Record<string, ICartItem>) {
-		return new Map(Object.entries(products).map(([k, v]) => [Number(k), v]))
+		return Object.fromEntries(
+			Object.entries(products).map(([k, v]) => [Number(k), v])
+		) as Record<number, ICartItem>
 	}
 
 	function loadFromLocalStorage() {
 		if (!getCartLS()) return null
 
 		const parsedCart = parseCartLS()
-		parsedCart.products = restoreProducts(
-			parsedCart.products as unknown as Record<string, ICartItem>
-		)
+		parsedCart.products = restoreProducts(parsedCart.products)
 
 		return parsedCart
 	}
@@ -103,22 +110,22 @@ export const useCartStore = defineStore('cart', () => {
 		return setCartLS(
 			JSON.stringify({
 				...cart.value,
-				products: Object.fromEntries(cartItems.value),
+				products: cartItems.value,
 			})
 		)
 	}
 
 	function updateCartCalculations() {
-		const total = cartItemsValues.value.reduce(
+		const total = Object.values(cartItems.value).reduce(
 			(sum, item) => sum + item.price * item.quantity,
 			0
 		)
-		const discountedTotal = cartItemsValues.value.reduce(
+		const discountedTotal = Object.values(cartItems.value).reduce(
 			(sum, item) => sum + item.discountedPrice * item.quantity,
 			0
 		)
-		const totalProducts = cart.value.products.size
-		const totalQuantity = cartItemsValues.value.reduce(
+		const totalProducts = Object.values(cartItems.value).length
+		const totalQuantity = Object.values(cartItems.value).reduce(
 			(sum, item) => sum + item.quantity,
 			0
 		)
@@ -149,11 +156,13 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	watch(
-		() => cart.value.products,
+		() => ({
+			count: Object.keys(cart.value.products).length,
+			ids: Object.keys(cart.value.products),
+		}),
 		() => {
 			onUpdateCart()
-		},
-		{ deep: true }
+		}
 	)
 
 	return {
@@ -166,6 +175,5 @@ export const useCartStore = defineStore('cart', () => {
 		loadCart,
 		minusQuantity,
 		plusQuantity,
-		cartItemsValues,
 	}
 })

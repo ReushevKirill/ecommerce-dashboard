@@ -3,16 +3,15 @@ import { useCartStore } from '~/store/cartStore'
 
 export const useCart = () => {
 	const cartStore = useCartStore()
-	const { cartItems, cart, cartItemsValues } = storeToRefs(cartStore)
+	const { cartItems, cart } = storeToRefs(cartStore)
 	const { addToCart, removeProduct, minusQuantity, plusQuantity } = cartStore
 
 	const { _getItemBase, _setItemBase, _parseBase } = useLocalStorage()
 	const CART_KEY_LS = 'cart'
 
-	const cartIsNotEmpty = computed(() => cartItems.value.size > 0)
-
-	// Cart calculations
-	// function reduce
+	const cartIsNotEmpty = computed(
+		() => Object.values(cartItems.value).length > 0
+	)
 
 	// LocalStorage methods
 	const getCartLS = _getItemBase<ICart>(CART_KEY_LS)
@@ -29,7 +28,6 @@ export const useCart = () => {
 		minusQuantity,
 		plusQuantity,
 		cart,
-		cartItemsValues,
-		cartIsNotEmpty
+		cartIsNotEmpty,
 	}
 }

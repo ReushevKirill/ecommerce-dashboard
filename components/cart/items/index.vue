@@ -4,9 +4,9 @@
 
 <template>
 	<div class="cart-items">
-		<template v-if="cartItems?.size > 0">
+		<template v-if="Object.values(cartItems).length > 0">
 			<CartItem
-				v-for="item in cartItems.values()"
+				v-for="item in Object.values(cartItems)"
 				:key="item.id"
 				:data="item" />
 		</template>

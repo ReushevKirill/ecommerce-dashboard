@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import type { ProductType } from '~/app/types/api'
+	import type { ProductType } from '~/app/types/api';
 
 	const props = withDefaults(
 		defineProps<{
@@ -11,7 +11,7 @@
 	)
 
 	const { minusQuantity, plusQuantity, cartItems, addToCart } = useCart()
-	const cartItem = computed(() => cartItems.value.get(props.data.id) ?? null)
+	const cartItem = computed(() => cartItems.value[props.data.id] ?? null)
 	const isNotAvailableForAdding = computed(
 		() => cartItem.value?.quantity === props.data.stock
 	)

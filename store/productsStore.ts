@@ -6,10 +6,6 @@ export const useProductStore = defineStore('product', () => {
 	const isLoading = ref(false)
 	const error = ref(null)
 
-	const {
-		api: { baseURL },
-	} = useAppConfig()
-
 	async function fetchAllProducts() {
 		try {
 			isLoading.value = true
