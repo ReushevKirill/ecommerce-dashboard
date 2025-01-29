@@ -17,7 +17,7 @@
 	)
 
 	function plusHandler() {
-		return cartItem.value ? plusQuantity(cartItem.value) : addToCart(props.data)
+		return cartItem.value ? plusQuantity(cartItem.value.id) : addToCart(props.data)
 	}
 </script>
 <template>
@@ -45,7 +45,7 @@
 					@click.prevent="() => {}">
 					<Icon
 						name="mdi:minus"
-						@click.prevent="minusQuantity(cartItem)"
+						@click.prevent="minusQuantity(cartItem.id)"
 						class="products__btn-action"
 						v-if="cartItem" />
 					<span class="products__price">

@@ -63,11 +63,36 @@ export const useCartStore = defineStore('cart', () => {
 		cart.value.products[product.id] = product
 	}
 
-	// TODO переписать plusQuantity и minusQuantity
-	function plusQuantity(item: ICartItem) {
-		if (item.stock > item.quantity) {
-			item.quantity++
+	function plusQuantity(itemId: number) {
+		const item = cart.value.products[itemId]
+
+		if (!item || item.quantity >= item.stock) return false
+
+		cart.value.products[itemId] = {
+			...item,
+			quantity: item.quantity + 1,
 		}
+
+		updateCartCalculations()
+	}
+
+	function minusQuantity(itemId: number) {
+		const item = cart.value.products[itemId]
+
+		if (!item) return
+
+		const newQuantity = item.quantity - 1
+
+		if (newQuantity < 1) {
+			removeProduct(itemId)
+		} else {
+			cart.value.products[itemId] = {
+				...item,
+				quantity: newQuantity,
+			}
+		}
+
+		updateCartCalculations()
 	}
 
 	function removeProduct(id: number) {
@@ -81,14 +106,6 @@ export const useCartStore = defineStore('cart', () => {
 		updateCartCalculations()
 
 		return true
-	}
-
-	function minusQuantity(item: ICartItem) {
-		if (item.quantity > 1) {
-			item.quantity--
-		} else {
-			removeProduct(item.id)
-		}
 	}
 
 	function restoreProducts(products: Record<string, ICartItem>) {
