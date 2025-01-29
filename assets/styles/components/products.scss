@@ -73,6 +73,13 @@
   font-weight: 600;
 }
 
+.products__old-price {
+	letter-spacing: -1px;
+	color: var(--clr-oldPrice-grey);
+	text-decoration: line-through;
+	text-decoration-color: var(--clr-grey1);
+}
+
 .products__price {
 	letter-spacing: -1px;
 }

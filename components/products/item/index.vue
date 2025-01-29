@@ -11,13 +11,19 @@
 	)
 
 	const { minusQuantity, plusQuantity, cartItems, addToCart } = useCart()
+
 	const cartItem = computed(() => cartItems.value[props.data.id] ?? null)
+	const isHideOldPrice = computed(
+		() => !cartItem.value && Math.round(props.data.discountPercentage) > 10
+	)
 	const isNotAvailableForAdding = computed(
 		() => cartItem.value?.quantity === props.data.stock
 	)
 
 	function plusHandler() {
-		return cartItem.value ? plusQuantity(cartItem.value.id) : addToCart(props.data)
+		return cartItem.value
+			? plusQuantity(cartItem.value.id)
+			: addToCart(props.data)
 	}
 </script>
 <template>
@@ -48,6 +54,9 @@
 						@click.prevent="minusQuantity(cartItem.id)"
 						class="products__btn-action"
 						v-if="cartItem" />
+					<span class="products__old-price" v-if="isHideOldPrice">
+						{{ calcOldPrice(data.price, data.discountPercentage) }}
+					</span>
 					<span class="products__price">
 						{{ formatPrice(data.price) }}
 					</span>

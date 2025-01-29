@@ -1,5 +1,4 @@
 import type { ICart, ICartItem, ProductType } from '~/app/types/api'
-import { calcDiscountProductPrice } from '~/utils/productsUtils'
 
 export const useCartStore = defineStore('cart', () => {
 	const isLoading = ref(false)
@@ -31,7 +30,8 @@ export const useCartStore = defineStore('cart', () => {
 			quantity: 1,
 			total: p.price,
 			discountPercentage: p.discountPercentage,
-			discountedPrice: calcDiscountProductPrice(p.price, p.discountPercentage),
+			oldPrice: calcOldPrice(p.price, p.discountPercentage),
+			discountAmount: calcDiscountAmount(p.price, p.discountPercentage),
 			thumbnail: p.thumbnail,
 			stock: p.stock,
 		}
@@ -133,22 +133,18 @@ export const useCartStore = defineStore('cart', () => {
 	}
 
 	function updateCartCalculations() {
-		const total = Object.values(cartItems.value).reduce(
-			(sum, item) => sum + item.price * item.quantity,
+		const products = Object.values(cartItems.value)
+
+		const total = products.reduce((s, p) => s + p.price * p.quantity, 0)
+		const discountedTotal = products.reduce(
+			(s, p) => s + p.discountAmount * p.quantity,
 			0
 		)
-		const discountedTotal = Object.values(cartItems.value).reduce(
-			(sum, item) => sum + item.discountedPrice * item.quantity,
-			0
-		)
-		const totalProducts = Object.values(cartItems.value).length
-		const totalQuantity = Object.values(cartItems.value).reduce(
-			(sum, item) => sum + item.quantity,
-			0
-		)
+		const totalProducts = products.length
+		const totalQuantity = products.reduce((s, p) => s + p.quantity, 0)
 
 		cart.value.total = Math.floor(total)
-		cart.value.discountedTotal = Math.floor(discountedTotal)
+		cart.value.discountedTotal = Math.round(discountedTotal)
 		cart.value.totalProducts = totalProducts
 		cart.value.totalQuantity = totalQuantity
 	}
