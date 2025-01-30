@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-	import type { ICartItem } from '~/app/types/api'
-
-	const { removeProduct } = useCart()
+	import type { ICartItem } from '~/app/types/api';
 
 	const props = withDefaults(
 		defineProps<{
@@ -11,6 +9,10 @@
 			data: () => ({} as ICartItem),
 		}
 	)
+
+	const { data } = toRefs(props)
+
+	const { removeProduct, oldPrice, price } = useCart(data)
 </script>
 
 <template>
@@ -29,9 +31,17 @@
 			</span>
 			<div class="cart-item__footer">
 				<CartItemCounter :data="data" />
-				<span class="cart-item__price">
-					{{ formatPrice(data.price) }}
-				</span>
+				<div class="cart-item__prices">
+					<Text
+						type="p1semibold"
+						class="cart-item__old-price"
+						v-if="data.discountPercentage > 10">
+						{{ oldPrice }}
+					</Text>
+					<Text type="p1semibold" class="cart-item__price">
+						{{ formatPrice(price) }}
+					</Text>
+				</div>
 			</div>
 		</div>
 		<Icon

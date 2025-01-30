@@ -11,6 +11,7 @@
 	)
 
 	const { minusQuantity, plusQuantity, cartItems, addToCart } = useCart()
+	const { oldPrice } = useProduct(props.data)
 
 	const cartItem = computed(() => cartItems.value[props.data.id] ?? null)
 	const isHideOldPrice = computed(
@@ -55,7 +56,7 @@
 						class="products__btn-action"
 						v-if="cartItem" />
 					<span class="products__old-price" v-if="isHideOldPrice">
-						{{ calcOldPrice(data.price, data.discountPercentage) }}
+						{{ oldPrice }}
 					</span>
 					<span class="products__price">
 						{{ formatPrice(data.price) }}

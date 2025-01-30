@@ -4,7 +4,7 @@
 
 <template>
 	<div class="order-price" v-show="cart.total > 0">
-		<Text type="semibold" class="order-price__title">
+		<Text type="p3semibold" class="order-price__title">
       Итого
     </Text>
 		<Text type="bold" class="order-price__price">

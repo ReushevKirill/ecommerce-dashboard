@@ -2,7 +2,13 @@
   color: var(--clr-textPrimary);
 }
 
-.text--semibold {
+.text--p1semibold {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.05px;
+}
+
+.text--p3semibold {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: .02px;

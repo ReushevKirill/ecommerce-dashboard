@@ -77,10 +77,20 @@
 	cursor: pointer;
 }
 
+.cart-item__prices {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
 .cart-item__price {
-	font-weight: 600;
 	white-space: nowrap;
-	letter-spacing: -1px;
+}
+
+.cart-item__old-price {
+	color: var(--clr-oldPrice-grey);
+	text-decoration: line-through;
+	text-decoration-color: var(--clr-grey2);
 }
 
 .cart-greeting {

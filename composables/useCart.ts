@@ -1,17 +1,24 @@
-import type { ICart } from '~/app/types/api'
+import type { ICart, ICartItem } from '~/app/types/api'
 import { useCartStore } from '~/store/cartStore'
 
-export const useCart = () => {
+const CART_KEY_LS = 'cart'
+
+export const useCart = (data?: globalThis.Ref<ICartItem>) => {
 	const cartStore = useCartStore()
 	const { cartItems, cart } = storeToRefs(cartStore)
 	const { addToCart, removeProduct, minusQuantity, plusQuantity } = cartStore
 
 	const { _getItemBase, _setItemBase, _parseBase } = useLocalStorage()
-	const CART_KEY_LS = 'cart'
-
 	const cartIsNotEmpty = computed(
 		() => Object.values(cartItems.value).length > 0
 	)
+	const oldPrice = computed(() => {
+		return data ? data.value.quantity * calcOldPrice(data.value.price, data.value.discountPercentage) : 0
+	})
+
+	const price = computed(() => {
+		return data ? data.value.quantity * data.value.price : 0
+	})
 
 	// LocalStorage methods
 	const getCartLS = _getItemBase<ICart>(CART_KEY_LS)
@@ -29,5 +36,7 @@ export const useCart = () => {
 		plusQuantity,
 		cart,
 		cartIsNotEmpty,
+		oldPrice,
+		price
 	}
 }
