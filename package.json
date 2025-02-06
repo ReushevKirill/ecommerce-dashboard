@@ -1,28 +1,42 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "@nuxt/icon": "^1.10.3",
-    "@nuxt/image": "^1.8.1",
-    "@pinia/nuxt": "^0.8.0",
-    "defu": "^6.1.4",
-    "nuxt": "^3.14.1592",
-    "pinia": "^2.2.8",
-    "vue": "latest",
-    "vue-router": "latest",
-    "vuetify-nuxt-module": "^0.18.3"
-  },
-  "devDependencies": {
-    "@iconify-json/mdi": "^1.2.2",
-    "sass": "^1.81.0",
-    "sass-loader": "^16.0.3"
-  }
+	"name": "nuxt-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
+		"lint:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .gitignore .",
+		"format": "prettier --write \"**/*.{js,ts,vue,json,css,scss}\""
+	},
+	"dependencies": {
+		"@nuxt/icon": "^1.10.3",
+		"@nuxt/image": "^1.8.1",
+		"@pinia/nuxt": "^0.8.0",
+		"defu": "^6.1.4",
+		"nuxt": "^3.14.1592",
+		"pinia": "^2.2.8",
+		"vue": "latest",
+		"vue-router": "latest",
+		"vuetify-nuxt-module": "^0.18.3"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.19.0",
+		"@iconify-json/mdi": "^1.2.2",
+		"@typescript-eslint/eslint-plugin": "^8.23.0",
+		"@typescript-eslint/parser": "^8.23.0",
+		"eslint": "^9.19.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-nuxt": "^4.0.0",
+		"eslint-plugin-prettier": "^5.2.3",
+		"eslint-plugin-vue": "^9.32.0",
+		"globals": "^15.14.0",
+		"prettier": "^3.4.2",
+		"sass": "^1.81.0",
+		"sass-loader": "^16.0.3",
+		"typescript-eslint": "^8.23.0"
+	}
 }

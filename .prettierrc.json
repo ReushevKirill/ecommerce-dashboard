@@ -1,10 +1,12 @@
 {
   "semi": false,
-	"useTabs": true,
-	"singleQuote": true,
-	"jsxSingleQuote": true,
-	"tabWidth": 2,
-	"arrowParens": "avoid",
-	"bracketSameLine": true,
-	"vueIndentScriptAndStyle": true
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "bracketSpacing": true,
+  "trailingComma": "all",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": true,
+  "arrowParens": "avoid",
+  "vueIndentScriptAndStyle": true
 }
