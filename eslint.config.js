@@ -10,7 +10,12 @@ export default [
 	{
 		// Базовые настройки для всех файлов
 		files: ['**/*.{js,mjs,cjs,ts,vue}'],
-		ignores: ['node_modules/**', 'dist/**', '.nuxt/**', ',output/**'],
+		ignores: [
+			'**/.nuxt/**', // Игнорируем папку .nuxt
+			'**/node_modules/**', // Игнорируем node_modules
+			'**/dist/**', // Игнорируем папку сборки
+			'**/output/**', // Игнорируем папку output
+		],
 		languageOptions: {
 			globals: {
 				...globals.browser,

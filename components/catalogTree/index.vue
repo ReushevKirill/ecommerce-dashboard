@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 	const { categories, catsError, catsIsLoading, renderCatPagePath } =
 		useCategories()
+
+	const {
+		routes: { home },
+	} = useAppConfig()
 </script>
 
 <template>
@@ -9,6 +13,9 @@
 			<Loader v-if="catsIsLoading" />
 			<MyError v-else-if="catsError" :error="catsError" />
 			<template v-else>
+				<NuxtLink :to="home.path">
+					{{ home.name }}
+				</NuxtLink>
 				<ul
 					class="catalog-tree__list"
 					v-for="category in categories"

@@ -5,4 +5,11 @@ export default defineAppConfig({
 	icon: {
 		class: 'icon',
 	},
+	routes: {
+		home: {
+			slug: 'home',
+			name: 'Home',
+			path: '/',
+		},
+	},
 })
