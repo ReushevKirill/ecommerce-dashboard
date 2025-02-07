@@ -8,7 +8,7 @@
 	height: 100%;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
-  gap: 2px;
+	gap: 2px;
 
 	transition: transform 0.1s ease-in-out;
 
@@ -21,9 +21,9 @@
 	position: relative;
 	aspect-ratio: 1;
 	width: 100%;
-  border-radius: 24px;
-  border: 2px solid var(--clr-grey4);
-  overflow: hidden;
+	border-radius: 24px;
+	border: 2px solid var(--clr-grey4);
+	overflow: hidden;
 
 	img {
 		position: absolute;
@@ -38,7 +38,7 @@
 	position: absolute;
 	inset: 0;
 
-  font-weight: 700;
+	font-weight: 700;
 
 	color: var(--clr-white);
 	background-color: rgba(0, 0, 0, 0.6);
@@ -53,14 +53,14 @@
 
 .products__overlay-wrapper {
 	height: 100%;
-  display: flex;
+	display: flex;
 	flex-direction: column;
-  align-items: center;
-  justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 
 .products__overlay-count {
-  font-size: 32px;
+	font-size: 32px;
 	line-height: 0.8;
 }
 
@@ -69,8 +69,8 @@
 }
 
 .products__title {
-  font-size: 13px;
-  font-weight: 600;
+	font-size: 13px;
+	font-weight: 600;
 }
 
 .products__old-price {
@@ -96,7 +96,9 @@
 	background-color: var(--clr-grey4);
 	color: var(--clr-primary);
 
-	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	transition:
+		background-color 0.2s ease-in-out,
+		color 0.2s ease-in-out;
 
 	&.active {
 		background-color: var(--clr-primary);

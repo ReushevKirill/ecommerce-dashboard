@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-	import type { ICartItem } from '~/app/types/api';
+	import type { ICartItem } from '~/app/types/api'
 
 	const props = withDefaults(
 		defineProps<{
 			data: ICartItem
 		}>(),
 		{
-			data: () => ({} as ICartItem),
-		}
+			data: () => ({}) as ICartItem,
+		},
 	)
 
 	const { data } = toRefs(props)
@@ -23,19 +23,21 @@
 				height="83"
 				:src="data.thumbnail"
 				:alt="data.title"
-				loading="lazy" />
+				loading="lazy"
+			/>
 		</div>
 		<div class="cart-item__content">
 			<span class="cart-item__title">
 				{{ data.title }}
 			</span>
 			<div class="cart-item__footer">
-				<CartItemCounter :data="data" />
+				<CartItemCounter :data="data" data-id="kd" data-op="adsasd" />
 				<div class="cart-item__prices">
 					<Text
 						type="p1semibold"
 						class="cart-item__old-price"
-						v-if="data.discountPercentage > 10">
+						v-if="data.discountPercentage > 10"
+					>
 						{{ oldPrice }}
 					</Text>
 					<Text type="p1semibold" class="cart-item__price">
@@ -47,6 +49,7 @@
 		<Icon
 			name="mdi:close"
 			class="cart-item__remove"
-			@click="removeProduct(data.id)" />
+			@click="removeProduct(data.id)"
+		/>
 	</div>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import type { ICartItem } from '~/app/types/api';
+	import type { ICartItem } from '~/app/types/api'
 	const { minusQuantity, plusQuantity } = useCart()
 
 	const props = withDefaults(
@@ -7,8 +7,8 @@
 			data: ICartItem
 		}>(),
 		{
-			data: () => ({} as ICartItem),
-		}
+			data: () => ({}) as ICartItem,
+		},
 	)
 </script>
 
@@ -17,13 +17,15 @@
 		<Icon
 			name="mdi:minus"
 			class="cart-item__counter-action"
-			@click="minusQuantity(data.id)" />
+			@click="minusQuantity(data.id)"
+		/>
 		<div class="cart-item__counter-count">
-      {{ data.quantity }}
-    </div>
+			{{ data.quantity }}
+		</div>
 		<Icon
 			name="mdi:plus"
 			class="cart-item__counter-action"
-			@click="plusQuantity(data.id)" />
+			@click="plusQuantity(data.id)"
+		/>
 	</div>
 </template>

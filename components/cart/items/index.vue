@@ -8,7 +8,8 @@
 			<CartItem
 				v-for="item in Object.values(cartItems)"
 				:key="item.id"
-				:data="item" />
+				:data="item"
+			/>
 		</template>
 		<template v-else>
 			<b>Корзина пуста</b>

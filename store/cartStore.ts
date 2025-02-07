@@ -110,7 +110,7 @@ export const useCartStore = defineStore('cart', () => {
 
 	function restoreProducts(products: Record<string, ICartItem>) {
 		return Object.fromEntries(
-			Object.entries(products).map(([k, v]) => [Number(k), v])
+			Object.entries(products).map(([k, v]) => [Number(k), v]),
 		) as Record<number, ICartItem>
 	}
 
@@ -128,7 +128,7 @@ export const useCartStore = defineStore('cart', () => {
 			JSON.stringify({
 				...cart.value,
 				products: cartItems.value,
-			})
+			}),
 		)
 	}
 
@@ -138,7 +138,7 @@ export const useCartStore = defineStore('cart', () => {
 		const total = products.reduce((s, p) => s + p.price * p.quantity, 0)
 		const discountedTotal = products.reduce(
 			(s, p) => s + p.discountAmount * p.quantity,
-			0
+			0,
 		)
 		const totalProducts = products.length
 		const totalQuantity = products.reduce((s, p) => s + p.quantity, 0)
@@ -175,7 +175,7 @@ export const useCartStore = defineStore('cart', () => {
 		}),
 		() => {
 			onUpdateCart()
-		}
+		},
 	)
 
 	return {

@@ -69,8 +69,8 @@ export interface ProductType {
 }
 
 export interface ICart {
-	id: number,
-	products: Record<number, ICartItem>,
+	id: number
+	products: Record<number, ICartItem>
 	total: number
 	discountedTotal: number
 	userId: number
@@ -79,14 +79,14 @@ export interface ICart {
 }
 
 export interface ICartItem {
-	id: number,
-	title: string,
-	price: number,
-	oldPrice: number,
-	quantity: number,
-	total: number,
-	discountPercentage: number,
-	discountAmount: number,
+	id: number
+	title: string
+	price: number
+	oldPrice: number
+	quantity: number
+	total: number
+	discountPercentage: number
+	discountAmount: number
 	thumbnail: string
 	stock: number
 }

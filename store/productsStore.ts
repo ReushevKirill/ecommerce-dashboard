@@ -16,7 +16,7 @@ export const useProductStore = defineStore('product', () => {
 					headers: {
 						'Content-Type': 'application/json',
 					},
-				}
+				},
 			)
 			products.value = data?.products
 		} catch (e: Error | any) {

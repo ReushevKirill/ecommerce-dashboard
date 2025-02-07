@@ -10,10 +10,13 @@ export const useCart = (data?: globalThis.Ref<ICartItem>) => {
 
 	const { _getItemBase, _setItemBase, _parseBase } = useLocalStorage()
 	const cartIsNotEmpty = computed(
-		() => Object.values(cartItems.value).length > 0
+		() => Object.values(cartItems.value).length > 0,
 	)
 	const oldPrice = computed(() => {
-		return data ? data.value.quantity * calcOldPrice(data.value.price, data.value.discountPercentage) : 0
+		return data
+			? data.value.quantity *
+					calcOldPrice(data.value.price, data.value.discountPercentage)
+			: 0
 	})
 
 	const price = computed(() => {
@@ -37,6 +40,6 @@ export const useCart = (data?: globalThis.Ref<ICartItem>) => {
 		cart,
 		cartIsNotEmpty,
 		oldPrice,
-		price
+		price,
 	}
 }

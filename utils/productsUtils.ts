@@ -1,4 +1,3 @@
-
 export function calcTotalProductPrice(quantity: number, price: number) {
 	return Math.floor(price * quantity)
 }
@@ -12,7 +11,7 @@ export function calcDiscountPrice(price: number, discountPercentage: number) {
 }
 
 export function calcOldPrice(price: number, discountPercentage: number) {
-	return Math.round(price + ((price * Math.round(discountPercentage)) / 100))
+	return Math.round(price + (price * Math.round(discountPercentage)) / 100)
 }
 
 export function calcDiscountAmount(price: number, discountPercentage: number) {

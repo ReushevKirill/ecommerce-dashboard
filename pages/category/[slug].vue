@@ -7,15 +7,12 @@
 		api: { baseURL },
 	} = useAppConfig()
 
-	const {
-		data: cat,
-		status,
-	} = await useAsyncData<{ products: ProductType[] }>(
+	const { data: cat, status } = await useAsyncData<{ products: ProductType[] }>(
 		`category-${route.params.slug}`,
 		() =>
 			$fetch(`/products/category/${route.params.slug}`, {
 				baseURL: baseURL,
-			})
+			}),
 	)
 </script>
 

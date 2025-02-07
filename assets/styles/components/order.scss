@@ -1,15 +1,13 @@
-
-
 .order-price {
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 16px;
-  pointer-events: auto;
+	min-height: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 16px;
+	pointer-events: auto;
 }
 
 .order-price__title {
-  margin-bottom: 4px;
-  color: var(--clr-grey2);
+	margin-bottom: 4px;
+	color: var(--clr-grey2);
 }

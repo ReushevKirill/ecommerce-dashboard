@@ -7,7 +7,7 @@
 		}>(),
 		{
 			items: () => [] as ProductType[],
-		}
+		},
 	)
 </script>
 <template>

@@ -12,11 +12,13 @@
 				<ul
 					class="catalog-tree__list"
 					v-for="category in categories"
-					:key="category.slug">
+					:key="category.slug"
+				>
 					<li class="catalog-tree__item">
 						<NuxtLink
 							class="catalog-tree__link"
-							:to="renderCatPagePath(category.slug)">
+							:to="renderCatPagePath(category.slug)"
+						>
 							<span>{{ category.name }}</span>
 						</NuxtLink>
 					</li>

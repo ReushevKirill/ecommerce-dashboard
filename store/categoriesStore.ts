@@ -13,16 +13,13 @@ export const useCategoriesStore = defineStore('categories', () => {
 	async function fetchAllCategories() {
 		try {
 			isLoading.value = true
-			const data = await $fetch(
-				'/products/categories',
-				{
-					baseURL: baseURL,
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			)
+			const data = await $fetch('/products/categories', {
+				baseURL: baseURL,
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
 			categories.value = data as ICategory[]
 		} catch (e: Error | any) {
 			error.value = e?.message

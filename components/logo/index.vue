@@ -1,8 +1,5 @@
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <template>
-	<div class="logo">
-        foodo
-    </div>
+	<div class="logo">foodo</div>
 </template>

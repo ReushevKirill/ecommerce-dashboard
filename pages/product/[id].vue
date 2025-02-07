@@ -20,23 +20,23 @@
 			}),
 		{
 			pick: ['images', 'title', 'description', 'price', 'reviews'],
-		}
+		},
 	)
 </script>
 
 <template>
 	<button @click="router.back()">Назад</button>
 	<div class="product">
-    <img :src="product?.images[0]" alt="" />
+		<img :src="product?.images[0]" alt="" />
 		<h3>{{ product?.title }}</h3>
-    <div>{{ product?.description }}</div>
-    <div>{{ product?.price }}</div>
-    <b>Reviews:</b>
-    <ul>
-      <li v-for="review in product?.reviews" :key="String(review.date)">
-        <i>{{ review.reviewerName }}</i>
-        <p>{{ review.comment }}</p>
-      </li>
-    </ul>
+		<div>{{ product?.description }}</div>
+		<div>{{ product?.price }}</div>
+		<b>Reviews:</b>
+		<ul>
+			<li v-for="review in product?.reviews" :key="String(review.date)">
+				<i>{{ review.reviewerName }}</i>
+				<p>{{ review.comment }}</p>
+			</li>
+		</ul>
 	</div>
 </template>

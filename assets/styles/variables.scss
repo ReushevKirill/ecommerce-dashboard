@@ -11,14 +11,14 @@
 	// system colors
 	--clr-primary: var(--clr-crusta);
 	--clr-dark: #404040;
-	
+
 	--clr-grey1: #595959;
 	--clr-grey2: #a6a6a6;
 	--clr-grey3: #e0e0e0;
 	--clr-grey4: var(--clr-concrete);
 
 	--clr-oldPrice-grey: #c4c4c4;
-	
+
 	--clr-textPrimary: var(--clr-dark);
 	--clr-bgPrimary: var(--clr-concrete);
 
@@ -32,8 +32,8 @@
 		calc(var(--app-widthMax) - 32px)
 	);
 
-    // heights
-    --header-height: 88px;
+	// heights
+	--header-height: 88px;
 
 	// z-indexes
 	--z-header: 100;
@@ -44,5 +44,4 @@
 	--rightAside-borderRadius: 24px;
 	--main-borderRadius: 32px 32px 0 0;
 	--btn-borderRadius: 56px;
-	
 }

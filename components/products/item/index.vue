@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-	import type { ProductType } from '~/app/types/api';
+	import type { ProductType } from '~/app/types/api'
 
 	const props = withDefaults(
 		defineProps<{
 			data: ProductType
 		}>(),
 		{
-			data: () => ({} as ProductType),
-		}
+			data: () => ({}) as ProductType,
+		},
 	)
 
 	const { minusQuantity, plusQuantity, cartItems, addToCart } = useCart()
@@ -15,10 +15,10 @@
 
 	const cartItem = computed(() => cartItems.value[props.data.id] ?? null)
 	const isHideOldPrice = computed(
-		() => !cartItem.value && Math.round(props.data.discountPercentage) > 10
+		() => !cartItem.value && Math.round(props.data.discountPercentage) > 10,
 	)
 	const isNotAvailableForAdding = computed(
-		() => cartItem.value?.quantity === props.data.stock
+		() => cartItem.value?.quantity === props.data.stock,
 	)
 
 	function plusHandler() {
@@ -37,7 +37,8 @@
 						<div class="products__overlay-count">{{ cartItem.quantity }}</div>
 						<div
 							class="products__overlay-text"
-							v-show="isNotAvailableForAdding">
+							v-show="isNotAvailableForAdding"
+						>
 							Not anymore
 						</div>
 					</div>
@@ -49,12 +50,14 @@
 			<div class="products__footer">
 				<div
 					:class="['products__btn', { active: cartItem }]"
-					@click.prevent="() => {}">
+					@click.prevent="() => {}"
+				>
 					<Icon
 						name="mdi:minus"
 						@click.prevent="minusQuantity(cartItem.id)"
 						class="products__btn-action"
-						v-if="cartItem" />
+						v-if="cartItem"
+					/>
 					<span class="products__old-price" v-if="isHideOldPrice">
 						{{ oldPrice }}
 					</span>
@@ -67,7 +70,8 @@
 						:class="[
 							'products__btn-action',
 							{ disabled: isNotAvailableForAdding },
-						]" />
+						]"
+					/>
 				</div>
 			</div>
 		</NuxtLink>

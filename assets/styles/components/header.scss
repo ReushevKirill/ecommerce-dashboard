@@ -1,21 +1,21 @@
 .header {
-    position: fixed;
-    left: 50%;
-    right: 0;
-    top: 0;
-    min-height: var(--header-height);
-    width: var(--app-widthContainer);
-    display: flex;
-    background-color: var(--clr-white);
-    transform: translateX(-50%);
-    z-index: var(--z-header);
-    border-radius: var(--header-borderRadius);
+	position: fixed;
+	left: 50%;
+	right: 0;
+	top: 0;
+	min-height: var(--header-height);
+	width: var(--app-widthContainer);
+	display: flex;
+	background-color: var(--clr-white);
+	transform: translateX(-50%);
+	z-index: var(--z-header);
+	border-radius: var(--header-borderRadius);
 }
 
 .header__container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
 }

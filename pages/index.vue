@@ -6,7 +6,7 @@
 </script>
 
 <template>
-	<Loader v-if="isLoading"/>
+	<Loader v-if="isLoading" />
 	<MyError v-else-if="error" :error="error" />
 	<div v-else>
 		<div v-for="product in products" :key="product.id">

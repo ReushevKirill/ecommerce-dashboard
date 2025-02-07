@@ -9,14 +9,14 @@
 }
 
 .catalog-tree__scroll-container {
-  display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-    overflow: auto;
-    overscroll-behavior-y: contain;
-    -webkit-user-select: none;
-    user-select: none;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
+	overflow: auto;
+	overscroll-behavior-y: contain;
+	-webkit-user-select: none;
+	user-select: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }

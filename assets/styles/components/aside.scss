@@ -1,5 +1,5 @@
 .aside {
-  --aside-maxWidth: auto;
+	--aside-maxWidth: auto;
 }
 
 .aside,
@@ -8,7 +8,7 @@
 	flex-direction: column;
 	gap: 16px;
 	width: 100%;
-  max-width: var(--aside-maxWidth);
+	max-width: var(--aside-maxWidth);
 }
 
 .aside__sidebar {

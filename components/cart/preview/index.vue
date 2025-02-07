@@ -1,6 +1,6 @@
 <script lang="ts" setup></script>
 
 <template>
-		<CartItems />
-		<CartFooter />
+	<CartItems />
+	<CartFooter />
 </template>

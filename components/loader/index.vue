@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-  const props = withDefaults(defineProps<{
-    width?: string
-  }>(), {
-    width: '2em'
-  })
+	const props = withDefaults(
+		defineProps<{
+			width?: string
+		}>(),
+		{
+			width: '2em',
+		},
+	)
 </script>
 
 <template>
