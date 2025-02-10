@@ -10,13 +10,25 @@
 	})
 
 	const { data, status, error } = useCustomFetch<fetchedProductsType>(
-		`/products?limit=${limitProducts.value}&skip=${skip.value}`,
-		{ method: 'GET', watch: [currentPage] },
+		'/products',
+		{
+			method: 'GET',
+			watch: [currentPage],
+			params: {
+				limit: limitProducts.value,
+				skip: skip.value,
+			},
+		},
 	)
 
 	const onClickHandler = (page: number) => {
 		currentPage.value = page
 	}
+
+	watch(data, (oldData, newData) => {
+		console.log(oldData)
+		console.log(newData)
+	})
 </script>
 
 <template>
@@ -24,7 +36,7 @@
 	<MyError v-else-if="error" :error="error" />
 	<div v-else-if="status === 'success'">
 		<ProductsList :items="data?.products!" />
-		<vueAwesomePaginate
+		<VueAwesomePaginate
 			v-model="currentPage"
 			:total-items="data?.total"
 			:items-per-page="limitProducts"
