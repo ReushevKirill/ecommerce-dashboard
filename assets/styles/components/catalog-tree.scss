@@ -20,3 +20,14 @@
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
+
+.catalog-tree__link {
+	span {
+		color: var(--clr-grey1);
+	}
+}
+
+.catalog-tree__link-home {
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--clr-grey3);
+}

@@ -13,8 +13,13 @@
 			<Loader v-if="catsIsLoading" />
 			<MyError v-else-if="catsError" :error="catsError" />
 			<template v-else>
-				<NuxtLink :to="home.path">
-					{{ home.name }}
+				<NuxtLink
+					:to="home.path"
+					class="catalog-tree__link catalog-tree__link-home"
+				>
+					<Text type="p2semibold">
+						{{ home.name }}
+					</Text>
 				</NuxtLink>
 				<ul
 					class="catalog-tree__list"
@@ -26,7 +31,9 @@
 							class="catalog-tree__link"
 							:to="renderCatPagePath(category.slug)"
 						>
-							<span>{{ category.name }}</span>
+							<Text type="p2semibold">
+								{{ category.name }}
+							</Text>
 						</NuxtLink>
 					</li>
 				</ul>

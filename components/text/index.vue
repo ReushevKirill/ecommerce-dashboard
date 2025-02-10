@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 	type Props = {
-		type?: 'p1semibold' | 'p3semibold' | 'bold'
+		type?: 'p1semibold' | 'p2semibold' | 'p3semibold' | 'bold'
 	}
 
 	const props = withDefaults(defineProps<Props>(), {})
