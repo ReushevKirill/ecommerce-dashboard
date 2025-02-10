@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 	import type { ProductType } from '~/app/types/api'
 
+	const {
+		routes: { home },
+	} = useAppConfig()
 	const route = useRoute()
 
 	const {
@@ -18,7 +21,7 @@
 
 <template>
 	<template v-if="status === 'success' && cat">
-		<NuxtLink to="/">to home</NuxtLink>
+		<NuxtLink :to="home.path">to home</NuxtLink>
 		<ClientOnly>
 			<ProductsList :items="cat.products" />
 		</ClientOnly>

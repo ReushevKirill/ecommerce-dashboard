@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { ProductType } from '~/app/types/api'
+import type { fetchedProductsType, ProductType } from '~/app/types/api'
 
 export const useProductStore = defineStore('product', () => {
 	const products = ref<ProductType[]>([])
@@ -9,7 +9,7 @@ export const useProductStore = defineStore('product', () => {
 	async function fetchAllProducts() {
 		try {
 			isLoading.value = true
-			const data: { products: ProductType[] } = await fetchFromAPI(
+			const data: fetchedProductsType = await fetchFromAPI(
 				'/products?limit=0',
 				{
 					method: 'GET',

@@ -6,7 +6,6 @@
 	const categoriesStore = useCategoriesStore()
 
 	onMounted(() => {
-		productStore.fetchAllProducts()
 		categoriesStore.fetchAllCategories()
 	})
 </script>

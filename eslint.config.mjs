@@ -4,9 +4,10 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import prettierConfig from 'eslint-config-prettier'
 import prettierPlugin from 'eslint-plugin-prettier'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+export default withNuxt(
 	{
 		// Базовые настройки для всех файлов
 		files: ['**/*.{js,mjs,cjs,ts,vue}'],
@@ -76,4 +77,4 @@ export default [
 	},
 	// Конфигурация Prettier
 	prettierConfig,
-]
+)
