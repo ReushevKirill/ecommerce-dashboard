@@ -1,5 +1,12 @@
 export type EndpointsType = '/products' | `/products/${number}` | '/users'
 
+export type fetchedProductsType = {
+	products: ProductType[]
+	total: number
+	limit: number
+	skip: number
+}
+
 export type ProductCategoryType =
 	| 'beauty'
 	| 'fragrances'

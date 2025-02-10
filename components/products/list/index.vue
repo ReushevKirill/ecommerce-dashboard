@@ -11,7 +11,8 @@
 	)
 </script>
 <template>
-	<ul class="products__list">
+	<ul class="products__list" v-if="items.length > 0">
 		<ProductsItem v-for="data in items" :key="data.id" :data="data" />
 	</ul>
+	<div v-else>Нет товаров.</div>
 </template>
