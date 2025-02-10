@@ -1,4 +1,5 @@
 import type { ICart, ICartItem, ProductType } from '~/app/types/api'
+import { calcDiscountAmount, calcOldPrice } from '~/utils/productsUtils'
 
 export const useCartStore = defineStore('cart', () => {
 	const isLoading = ref(false)
