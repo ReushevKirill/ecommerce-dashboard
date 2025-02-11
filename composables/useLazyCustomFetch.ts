@@ -1,10 +1,10 @@
 import { defu } from 'defu'
 import type { UseFetchOptions } from '#app'
 
-type UseFetchParams = Parameters<typeof useFetch>;
-type UrlType = UseFetchParams[0];
+type UseLazyFetchParams = Parameters<typeof useLazyFetch>;
+type UrlType = UseLazyFetchParams[0];
 
-export function useCustomFetch<T>(
+export function useLazyCustomFetch<T>(
 	url: UrlType,
 	opts: UseFetchOptions<T> = {},
 ) {
@@ -16,5 +16,5 @@ export function useCustomFetch<T>(
 
 	const params = defu(opts, defaults)
 
-	return useFetch(url, params)
+	return useLazyFetch(url, params)
 }

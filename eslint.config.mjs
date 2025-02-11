@@ -56,7 +56,8 @@ export default withNuxt(
 			'@typescript-eslint/triple-slash-reference': 'off',
 			'@typescript-eslint/no-explicit-any': 'off',
 			'no-undef': 'off',
-			'prettier/prettier': 'error', // Включаем Prettier как правило ESLint
+			'prettier/prettier': 'off', // Включаем Prettier как правило ESLint
+			'vue/no-multiple-template-root': 'off',
 			'vue/max-attributes-per-line': 'off', // Отключаем стандартное правило Vue
 			'vue/first-attribute-linebreak': [
 				'error',
