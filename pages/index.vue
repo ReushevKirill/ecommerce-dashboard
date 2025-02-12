@@ -19,15 +19,31 @@
 </script>
 
 <template>
-	<Loader v-if="status === 'pending'" />
-	<MyError v-else-if="error" :error="error" />
-	<div v-else-if="status === 'success'">
-		<ProductsList :items="data?.products!" />
-		<VueAwesomePaginate
-			v-model="currentPage"
-			:total-items="data?.total!"
-			:items-per-page="limit"
-			:max-pages-shown="maxPagesShown"
-		/>
-	</div>
+	<MySection class="home">
+		<template v-if="status === 'pending'">
+			<Loader />
+		</template>
+		<template v-else-if="error">
+			<MyError :error="error" />
+		</template>
+		<template v-else-if="status === 'success'">
+			<div class="home-products">
+				<ProductsList :items="data?.products!" />
+				<VueAwesomePaginate
+					v-model="currentPage"
+					:total-items="data?.total!"
+					:items-per-page="limit"
+					:max-pages-shown="maxPagesShown"
+				>
+					<template #prev-button>
+						<Icon name="mdi:chevron-left" />
+					</template>
+
+					<template #next-button>
+						<Icon name="mdi:chevron-right" />
+					</template>
+				</VueAwesomePaginate>
+			</div>
+		</template>
+	</MySection>
 </template>

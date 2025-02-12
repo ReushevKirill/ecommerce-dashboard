@@ -1,5 +1,4 @@
 .pagination-container {
-	margin-top: 32px;
 	width: 100%;
 	display: flex;
   align-items: center;
@@ -8,27 +7,37 @@
 }
 
 .paginate-buttons {
-	width: 40px;
+	width: 35px;
   aspect-ratio: 1;
-	border-radius: 20px;
+	border-radius: 8px;
 	cursor: pointer;
-	background-color: rgb(242, 242, 242);
-	border: 1px solid rgb(217, 217, 217);
-	color: black;
+	background-color: var(--clr-grey4);
+	border: 1px solid var(--clr-grey3);
+	color: var(--clr-black);
 }
 
 .active-page {
-	background-color: #3498db;
-	border: 1px solid #3498db;
-	color: white;
+	background-color: var(--clr-primary);
+	border: 1px solid var(--clr-primary);
+	color: var(--clr-white);
+}
+
+.back-button, .next-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.icon {
+		font-size: 20px;
+	}
 }
 
 @media (hover: hover) {
   .paginate-buttons:hover {
-    background-color: #d8d8d8;
+    background-color: var(--clr-grey3);
   }
 
   .active-page:hover {
-    background-color: #2988c8;
+    background-color: var(--clr-primary-hover);
   }
 }

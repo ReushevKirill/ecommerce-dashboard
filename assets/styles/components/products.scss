@@ -6,8 +6,8 @@
 
 .products__item {
 	height: 100%;
-	display: grid;
-	grid-template-rows: auto 1fr auto;
+	display: flex;
+	flex-direction: column;
 	gap: 2px;
 
 	transition: transform 0.1s ease-in-out;
@@ -74,14 +74,10 @@
 }
 
 .products__old-price {
-	letter-spacing: -1px;
+	letter-spacing: -0.5px;
 	color: var(--clr-oldPrice-grey);
 	text-decoration: line-through;
 	text-decoration-color: var(--clr-grey1);
-}
-
-.products__price {
-	letter-spacing: -1px;
 }
 
 .products__btn {

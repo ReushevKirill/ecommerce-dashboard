@@ -3,7 +3,11 @@ export function calcTotalProductPrice(quantity: number, price: number) {
 }
 
 export function formatPrice(price: number) {
-	return `${Math.round(price)} $`
+	return Math.round(price).toLocaleString('en-US', {
+		style: 'currency',
+		currency: 'USD',
+		maximumFractionDigits: 0,
+	})
 }
 
 export function calcDiscountPrice(price: number, discountPercentage: number) {

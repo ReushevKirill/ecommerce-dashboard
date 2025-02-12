@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 	import type { ICartItem } from '~/app/types/api'
+
 	const { minusQuantity, plusQuantity } = useCart()
 
 	const props = withDefaults(

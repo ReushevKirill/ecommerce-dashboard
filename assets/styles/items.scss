@@ -3,6 +3,7 @@
 @use './components/main';
 @use './components/aside';
 @use './components/footer';
+@use './components/home';
 
 // micro components
 @use './components/text';
@@ -13,3 +14,4 @@
 @use './components/products';
 @use './components/cart';
 @use './components/order';
+@use './components/home-products';
