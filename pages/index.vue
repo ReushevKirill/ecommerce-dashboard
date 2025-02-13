@@ -1,10 +1,7 @@
 <script setup lang="ts">
-	import { VueAwesomePaginate } from 'vue-awesome-paginate'
 	import type { fetchedProductsType } from '~/app/types/api'
 
-	const maxPagesShown = ref(5)
-
-	const { skipped, currentPage, limit } = usePagination({
+	const { skipped, currentPage, limit, maxPagesShown } = usePagination({
 		initialPage: 1,
 		limit: 10,
 	})
@@ -29,20 +26,12 @@
 		<template v-else-if="status === 'success'">
 			<div class="home-products">
 				<ProductsList :items="data?.products!" />
-				<VueAwesomePaginate
+				<MyPaginate
 					v-model="currentPage"
 					:total-items="data?.total!"
 					:items-per-page="limit"
 					:max-pages-shown="maxPagesShown"
-				>
-					<template #prev-button>
-						<Icon name="mdi:chevron-left" />
-					</template>
-
-					<template #next-button>
-						<Icon name="mdi:chevron-right" />
-					</template>
-				</VueAwesomePaginate>
+				/>
 			</div>
 		</template>
 	</MySection>

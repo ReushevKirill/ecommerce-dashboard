@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import type { UseFetchOptions } from '#app'
+import type { UseLazyFetchParams } from '~/app/types/common';
 
-type UseLazyFetchParams = Parameters<typeof useLazyFetch>;
 type UrlType = UseLazyFetchParams[0];
 
 export function useLazyCustomFetch<T>(

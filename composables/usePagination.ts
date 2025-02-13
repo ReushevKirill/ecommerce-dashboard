@@ -1,10 +1,14 @@
 type UsePaginationOptions = {
-	initialPage: number
+	initialPage?: number
 	limit: number
+  maxPagesShown?: number
 }
+
 export function usePagination(opts: UsePaginationOptions) {
-  const currentPage = ref(opts.initialPage);
-  const limit = ref(opts.limit);
+  const currentPage = ref(opts.initialPage ?? 1);
+  const limit = ref(opts.limit ?? 10);
+  const maxPagesShown = ref(opts.maxPagesShown ?? 5);
+
   const skipped = computed(() => {
 		return (currentPage.value - 1) * limit.value
 	})
@@ -13,7 +17,9 @@ export function usePagination(opts: UsePaginationOptions) {
     skipped,
     currentPage,
     limit,
+    maxPagesShown,
     setLimit: (newLimit: number) => limit.value = newLimit, 
-    setPage: (newPage: number) => currentPage.value = newPage
+    setPage: (newPage: number) => currentPage.value = newPage,
+    setMaxPagesShown: (newValue: number) => maxPagesShown.value = newValue,
   }
 }
