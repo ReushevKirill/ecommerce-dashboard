@@ -3,6 +3,6 @@
 <template>
 	<div class="cart__footer cart-footer">
 		<OrderPrice />
-		<Button class="cart-footer__btn" variant="primary"> Оформить </Button>
+		<MyButton class="cart-footer__btn" theme="primary"> Оформить </MyButton>
 	</div>
 </template>

@@ -6,5 +6,5 @@
 			Соберите корзину,<br />чтобы сделать заказ
 		</span>
 	</div>
-	<Button variant="primary" disabled> Продолжить </Button>
+	<MyButton theme="primary" disabled> Продолжить </MyButton>
 </template>

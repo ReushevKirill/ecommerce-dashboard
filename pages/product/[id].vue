@@ -25,7 +25,7 @@
 </script>
 
 <template>
-	<button @click="router.back()">Назад</button>
+	<MyButton @click="router.back()">Назад</MyButton>
 	<div class="product">
 		<img :src="product?.images[0]" alt="" />
 		<h3>{{ product?.title }}</h3>
